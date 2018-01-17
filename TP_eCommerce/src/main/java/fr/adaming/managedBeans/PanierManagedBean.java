@@ -46,6 +46,19 @@ public class PanierManagedBean implements Serializable {
 		this.listeLignecommande = new ArrayList<LigneCommande>();
 
 	}
+	
+	//Injection des dépendances
+	public void setLigneCommandeService(ILigneCommandeService ligneCommandeService) {
+		this.ligneCommandeService = ligneCommandeService;
+	}
+
+
+
+	public void setCommandeService(ICommandeService commandeService) {
+		this.commandeService = commandeService;
+	}
+
+
 
 	// getter et setter
 	public Panier getPanier() {

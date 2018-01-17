@@ -52,6 +52,7 @@ public class ProduitManagedBean implements Serializable {
 		this.listeProduit = (List<Produit>) maSession.getAttribute("produitListByCat");
 		this.listeProduitAll = (List<Produit>) maSession.getAttribute("produitListAll");
 	}
+	//Injection des dépendances
 
 	public IProduitService getProduitService() {
 		return produitService;
@@ -59,6 +60,11 @@ public class ProduitManagedBean implements Serializable {
 
 	public void setProduitService(IProduitService produitService) {
 		this.produitService = produitService;
+	}
+	
+
+	public void setCategorieService(ICategorieService categorieService) {
+		this.categorieService = categorieService;
 	}
 
 	public Categorie getCategorie() {

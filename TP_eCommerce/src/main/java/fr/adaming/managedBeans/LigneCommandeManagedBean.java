@@ -43,11 +43,26 @@ public class LigneCommandeManagedBean implements Serializable {
 		this.listeLigneCommande = new ArrayList<LigneCommande>();
 
 	}
+	//Injection des dépendances
+	public void setLigneCommandeService(ILigneCommandeService ligneCommandeService) {
+		this.ligneCommandeService = ligneCommandeService;
+	}
+
+
+	public void setProduitService(IProduitService produitService) {
+		this.produitService = produitService;
+	}
+
+
+	public void setCommandeService(ICommandeService commandeService) {
+		this.commandeService = commandeService;
+	}
 
 	// Getters et setters
 	public LigneCommande getLigneCommande() {
 		return ligneCommande;
 	}
+
 
 	public void setLigneCommande(LigneCommande ligneCommande) {
 		this.ligneCommande = ligneCommande;

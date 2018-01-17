@@ -29,6 +29,6 @@
 	</servlet-mapping>
 	<!-- La page d'accueil de mon projet -->
 	<welcome-file-list>
-		<welcome-file>login.xhtml</welcome-file>
+		<welcome-file>accueil.xhtml</welcome-file>
 	</welcome-file-list>
 </web-app>

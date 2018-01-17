@@ -33,6 +33,20 @@ public class ClientManagedBean implements Serializable {
 		this.client = new Client();
 	}
 
+	//Injection des dépendances
+	
+	public void setClientService(IClientService clientService) {
+		this.clientService = clientService;
+	}
+
+
+
+	public void setCommandeService(ICommandeService commandeService) {
+		this.commandeService = commandeService;
+	}
+
+
+
 	public Client getClient() {
 		return client;
 	}

@@ -2,7 +2,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -21,9 +20,9 @@ import fr.adaming.service.ICategorieService;
 @RequestScoped
 public class AdministrateurManagedBean implements Serializable {
 
-	@ManagedProperty(value="#{adminService}")
+	@ManagedProperty(value = "#{adminService}")
 	private IAdministrateurService administrateurService;
-	@ManagedProperty(value="#{categorieService}")
+	@ManagedProperty(value = "#{categorieService}")
 	private ICategorieService categorieService;
 
 	private Administrateur administrateur;
@@ -38,6 +37,10 @@ public class AdministrateurManagedBean implements Serializable {
 
 	public IAdministrateurService getAdministrateurService() {
 		return administrateurService;
+	}
+
+	public void setCategorieService(ICategorieService categorieService) {
+		this.categorieService = categorieService;
 	}
 
 	public void setAdministrateurService(IAdministrateurService administrateurService) {
