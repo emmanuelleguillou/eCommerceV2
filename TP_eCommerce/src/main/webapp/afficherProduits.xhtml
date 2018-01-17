@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:title>Page produits</h:title>
+</h:head>
+
+<h:body>
+	<h:form>
+
+		<p:dataTable var="pro" value="#{sessionScope.produitListAll}">
+			<p:column headerText="Photo">
+				<h:graphicImage value="#{pro.image}" width="200" height="200"></h:graphicImage>
+			</p:column>
+
+			<p:column headerText="Designation">
+				<h:outputText value="#{pro.designation}" />
+			</p:column>
+
+			<p:column headerText="Description">
+				<h:outputText value="#{pro.description}" />
+			</p:column>
+
+			<p:column headerText="Prix">
+				<h:outputText value="#{pro.prix}" />
+			</p:column>
+
+			<p:column headerText="Quantité">
+				<h:outputText value="#{pro.quantite}" />
+			</p:column>
+
+			<p:column headerText="Operations">
+				<p:commandLink value="supprimer"
+					action="#{prMB.supprimerProduitByCat}" update="@all">
+					<f:setPropertyActionListener value="#{pro.idProduit}"
+						target="#{prMB.produit.idProduit}"></f:setPropertyActionListener>
+				</p:commandLink>
+
+				<h:outputText value=" / " />
+				<p:commandLink value="modifier" action="#{prMB.modifLien}">
+					<f:setPropertyActionListener value="#{pro.idProduit}"
+						target="#{prMB.produit.idProduit}"></f:setPropertyActionListener>
+				</p:commandLink>
+
+
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>

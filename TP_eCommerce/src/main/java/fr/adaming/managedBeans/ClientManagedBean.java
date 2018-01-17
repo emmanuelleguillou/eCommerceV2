@@ -1,5 +1,3 @@
-package fr.adaming.managedbean;
-
 import java.io.Serializable;
 import java.util.List;
 

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Page Accueil</title>
+</h:head>
+
+<h:body>
+
+	<!-- Insertion du header -->
+	<ui:insert name="header"></ui:insert>
+	<ui:include src="template/header.xhtml"></ui:include>
+
+	<h:graphicImage library="pictures" name="soleil.gif"
+		style="position: absolute; right: 80px;" width="100" height="100"></h:graphicImage>
+
+
+	<h1 style="text-align: center; color: blue">
+		Liste des produits de la categorie
+		<h:outputText value="#{sessionScope.nomCategorie}" />
+	</h1>
+	<hr />
+	<h:form>
+		<p:growl id="messages" />
+		<p:dataTable
+			style="background-color: white ; width: 900px ; center ; margin-left : 175px"
+			var="pro" value="#{prMB.listeProduit}">
+			<p:column headerText="Photo">
+				<h:graphicImage value="#{pro.image}" width="200" height="200"></h:graphicImage>
+			</p:column>
+
+			<p:column headerText="Designation">
+				<h:outputText value="#{pro.designation}" />
+			</p:column>
+
+			<p:column headerText="Description">
+				<h:outputText value="#{pro.description}" />
+			</p:column>
+
+			<p:column headerText="Prix">
+				<h:outputText value="#{pro.prix}" />
+			</p:column>
+
+			<p:column headerText="Quantité en stock">
+				<h:outputText value="#{pro.quantite}" />
+			</p:column>
+
+			<p:column headerText="Quantité souhaitée">
+				<h:form>
+
+					<h:inputText value="#{lcMB.ligneCommande.quantite}" />
+
+					<p:commandLink value="Ajouter au Panier"
+						action="#{lcMB.ajouterLigneCommande}" update="@all">
+						<f:setPropertyActionListener value="#{pro.idProduit}"
+							target="#{lcMB.produit.idProduit}"></f:setPropertyActionListener>
+					</p:commandLink>
+				</h:form>
+			</p:column>
+		</p:dataTable>
+	</h:form>
+	<h:messages style="text-align: center; color:red"></h:messages>
+
+</h:body>
+</html>

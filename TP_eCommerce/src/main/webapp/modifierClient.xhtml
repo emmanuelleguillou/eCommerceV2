@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+	<title>Modifer un client</title>
+</h:head>
+
+<h:body>
+	<!-- Insertion du header -->
+	<ui:insert name="headerClient" />
+	<ui:include src="template/headerClient.xhtml" />
+
+	<h:graphicImage library="pictures" name="soleil.gif"
+		style="position: absolute; right: 80px;" width="100" height="100"></h:graphicImage>
+
+
+	<h1 style="text-align: center; color: blue">Formulaire de modification de votre compte</h1>
+		
+			<hr />
+
+
+	<h:form>
+	<p:growl id="messages" />
+		<h:panelGrid style="background-color: white ;width: 200px; margin-left: 450px ; margin-top:50px" columns="2">
+ID Client : <p:inputText id="idCl" label="ID CL" value="#{clMB.client.idClient}"
+				required="true"></p:inputText>
+
+			<br />
+
+
+Nom : <p:inputText id="idNom" label="Nom" value="#{clMB.client.nomClient}"
+				required="true"></p:inputText>
+
+			<br />
+
+Adresse : <p:inputText id="idAdresse" label="Adresse"
+				value="#{clMB.client.adresseClient}" required="true"></p:inputText>
+
+			<br />
+
+Email : <p:inputText id="idEmail" label="Email" value="#{clMB.client.email}"
+				required="true"></p:inputText>
+
+			<br />
+
+Téléphone : <p:inputText id="idTelephone" label="Telephone"
+				value="#{clMB.client.tel}" required="true"></p:inputText>
+
+			<br />
+			<br />
+
+			<h:commandButton style="center" value="Modifier votre compte"
+				action="#{clMB.modifierClient}" />
+
+		</h:panelGrid>
+
+
+	</h:form>
+
+
+
+
+
+</h:body>
+
+</html>

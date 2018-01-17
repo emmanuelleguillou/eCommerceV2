@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:title>Page Rechercher</h:title>
+</h:head>
+<h:body>
+	<h:form>
+		<h:panelGrid columns="2">
+		ID: <h:inputText value="#{caMB.categorie.idCategorie}"></h:inputText>
+			<p:commandButton value="Rechercher catégorie"
+				action="#{caMB.rechercherCategorie}" update="toto"></p:commandButton>
+		</h:panelGrid>
+
+	</h:form>
+	<p:dataTable var="cat" value="#{caMB.categorie}" id="toto">
+		<p:column headerText="Id">
+			<h:outputText value="#{caMB.categorie.idCategorie}" />
+		</p:column>
+
+		<p:column headerText="Nom">
+			<h:outputText value="#{caMB.categorie.nomCategorie}" />
+		</p:column>
+
+		<p:column headerText="Designation">
+			<h:outputText value="#{caMB.categorie.description}" />
+		</p:column>
+
+
+	</p:dataTable>
+	<h:messages style="text-align: center; color:red"></h:messages>
+</h:body>
+</html>

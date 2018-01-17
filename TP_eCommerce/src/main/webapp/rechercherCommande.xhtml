@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+	<title>Page accueil</title>
+
+
+</h:head>
+
+<h:body>
+	<!-- Insertion du header -->
+	<ui:insert name="headerClient" />
+	<ui:include src="template/headerClient.xhtml" />
+
+	<h:graphicImage library="pictures" name="soleil.gif"
+		style="position: absolute; right: 80px;" width="100" height="100"></h:graphicImage>
+
+
+	<h1 style="text-align: center; color: blue">Formulaire de recherche d'une commande</h1>
+		
+			<hr />
+
+	<h:form>
+		<h:panelGrid style="background-color: white ;width: 200px; margin-left: 450px ; margin-top:50px" columns="2">
+
+ID Commande : <p:inputText id="idC" label="ID Commande" value="#{cMB.commande.idCommande}"
+				required="true"></p:inputText>
+
+			<br />
+			<br />
+
+			<h:commandButton style="center" value="Rechercher la commande"
+				action="#{cMB.rechercherCommandeIDC}" />
+
+		</h:panelGrid>
+
+
+	</h:form>
+
+
+	<h:form>
+		<p:dataTable style="background-color: white ; width: 900px ; center ; margin-left : 175px"  var="com" value="#{cMB.commande}">
+			<p:column headerText="N° de la commande">
+				<h:outputText value="#{com.idCommande}" />
+			</p:column>
+
+			<p:column headerText="Date de la commande">
+				<h:outputText value="#{com.dateCommande}" />
+			</p:column>
+
+
+
+		</p:dataTable>
+	</h:form>
+
+	<h:form>
+		<h:commandButton style="margin-left : 175px" value="Afficher le détail"
+			action="#{lcMB.afficherLigneCommandeByIDCommande}" update="@all">
+			<f:setPropertyActionListener value="#{sessionScope.idCommande}"
+				target="#{lcMB.idCommande}" />
+		</h:commandButton>
+
+	</h:form>
+
+
+	<h:form id="tableau" rendered="#{lcMB.indice}">
+		<p:dataTable style="background-color: white ; width: 900px ; center ; margin-left : 175px"  var="lc" value="#{lcMB.listeLigneCommande}">
+			<p:column headerText="Id Ligne Commande">
+				<h:outputText value="#{lc.idLigneCommande}" />
+			</p:column>
+
+			<p:column headerText="ID Produit">
+				<h:outputText value="#{lc.produit.idProduit}" />
+			</p:column>
+
+			<p:column headerText="Quantité">
+				<h:outputText value="#{lc.quantite}" />
+			</p:column>
+
+			<p:column headerText="Prix">
+				<h:outputText value="#{lc.prix}" />
+			</p:column>
+
+		</p:dataTable>
+
+		
+		<h:commandButton style="margin-left : 175px" value="Valider la commande"
+			action="#{cMB.envoyerFacture}">
+			<f:setPropertyActionListener value="#{sessionScope.idCommande}"
+				target="#{cMB.idCommande}" />
+		</h:commandButton>
+	</h:form>
+
+
+</h:body>
+</html>

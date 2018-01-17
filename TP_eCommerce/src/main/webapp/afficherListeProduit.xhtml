@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:title>Page Accueil Admin</h:title>
+</h:head>
+
+<h:body>
+	<!-- Insertion du header -->
+	<ui:insert name="header"></ui:insert>
+	<ui:include src="template/headerAdmin.xhtml"></ui:include>
+
+	<h:graphicImage library="pictures" name="soleil.gif"
+		style="position: absolute; right: 80px;" width="100" height="100"></h:graphicImage>
+
+
+
+	<h1 style="text-align: center; color: blue">
+		Liste des produits de la categorie
+		<h:outputText value="#{sessionScope.idCat}" />
+	</h1>
+
+	<hr />
+
+	<h:form style="background-color: white ; width: 900px ; center ; margin-left : 175px">
+		<p:dataTable var="pro" value="#{sessionScope.produitListByCat}">
+			<p:column headerText="Photo">
+				<h:graphicImage value="#{pro.image}" width="200" height="200"></h:graphicImage>
+			</p:column>
+
+			<p:column headerText="ID">
+				<h:outputText value="#{pro.idProduit}" />
+			</p:column>
+
+			<p:column headerText="Designation">
+				<h:outputText value="#{pro.designation}" />
+			</p:column>
+
+			<p:column headerText="Description">
+				<h:outputText value="#{pro.description}" />
+			</p:column>
+
+			<p:column headerText="Prix">
+				<h:outputText value="#{pro.prix}" />
+			</p:column>
+
+			<p:column headerText="Quantité">
+				<h:outputText value="#{pro.quantite}" />
+			</p:column>
+
+			<p:column headerText="Operations">
+				<p:commandLink value="Supprimer"
+					action="#{prMB.supprimerProduitByCat}" update="@all">
+					<f:setPropertyActionListener value="#{pro.idProduit}"
+						target="#{prMB.produit.idProduit}"></f:setPropertyActionListener>
+				</p:commandLink>
+
+				<h:outputText value=" / " />
+				<p:commandLink value="Modifier" action="#{prMB.modifLien}">
+					<f:setPropertyActionListener value="#{pro.idProduit}"
+						target="#{prMB.produit.idProduit}"></f:setPropertyActionListener>
+				</p:commandLink>
+
+
+			</p:column>
+		</p:dataTable>
+
+		<p:commandButton value="Ajouter un Produit" action="ajouterProduit.xhtml"/>
+
+	</h:form>
+</h:body>
+</html>

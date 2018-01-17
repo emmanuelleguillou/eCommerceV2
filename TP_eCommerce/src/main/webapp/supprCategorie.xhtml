@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:title>Page Suprimer</h:title>
+</h:head>
+<h:body>
+	<h:form>
+		<h:panelGrid columns="2">
+		Id : <h:inputText value="#{caMB.categorie.idCategorie}"></h:inputText>
+			<p:commandButton value="Supprimer catégorie" action="#{caMB.supprimerCategorie}"></p:commandButton>
+		</h:panelGrid>
+
+	</h:form>
+	<h:messages style="text-align: center; color:red"></h:messages>
+</h:body>
+</html>

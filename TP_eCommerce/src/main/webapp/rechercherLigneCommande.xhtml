@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+	<title>Rechercher une ligne commande</title>
+</h:head>
+
+<h:body>
+
+	<ui:insert name="header"></ui:insert>
+	<ui:include src="template/header.xhtml"></ui:include>
+
+
+
+
+	<h1
+		style="text-align: center; color: red; margin-top: 50px; margin-left: -800px">Formulaire
+		de recherche d'une ligne commande</h1>
+
+	<h:form
+		style="background-color: white ;width: 400px; margin-left: 75px ; margin-top:50px">
+		<h:panelGrid columns="2">
+
+ID Ligne Commande : <p:inputText id="idLC" label="ID ligne Commande" value="#{lcMB.ligneCommande.idLigneCommande}"
+				required="true"></p:inputText>
+
+			<br />
+			<br />
+
+			<h:commandButton style="center" value="Rechercher une ligne commande"
+				action="#{lcMB.rechercherLigneCommande}" />
+
+		</h:panelGrid>
+
+
+	</h:form>
+
+
+<h1
+		style="color: red; text-align: center; margin-top: 50px; margin-left: -800px">Ligne Commande
+		recherché</h1>
+
+
+	<p:dataTable style="width: 1000px ; center ; margin-left : 75px"
+		var="lc" value="#{lcMB.ligneCommande}">
+		<p:column headerText="Id LC">
+			<h:outputText value="#{lc.idLigneCommande}" />
+		</p:column>
+		<br />
+		<p:column headerText="Produit">
+			<h:outputText value="#{lc.produit.idProduit}" />
+		</p:column>
+		<br />
+		<p:column headerText="Quantité">
+			<h:outputText value="#{lc.quantite}" />
+		</p:column>
+		<br />
+		<p:column headerText="Prix total">
+			<h:outputText value="#{lc.prix}" />
+		</p:column>
+		<br />
+		
+
+	</p:dataTable>
+
+
+
+
+</h:body>
+
+</html>

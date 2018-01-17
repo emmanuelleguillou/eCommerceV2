@@ -1,5 +1,3 @@
-package fr.adaming.managedbean;
-
 import java.util.ArrayList;
 import java.util.List;
 

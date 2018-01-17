@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Page Login</title>
+</h:head>
+<h:body
+	style="background: url('resources/pictures/fond2.jpg') no-repeat center fixed; background-size: cover">
+
+
+	<h:graphicImage library="pictures" name="soleil.gif"
+		style="position: absolute; right: 80px;" width="150" height="150"></h:graphicImage>
+
+	<h1 style="text-align: center; color: blue">Connexion
+		Administrateur</h1>
+	
+
+	<h:form>
+		<h:panelGrid
+			style="background-color: white ;width: 400px; margin-left: 415px ; margin-top:50px"
+			columns="2">
+		Mail : <h:inputText value="#{adminMB.administrateur.mail}"></h:inputText>
+		Mot de passe : <h:inputText value="#{adminMB.administrateur.mdp}"></h:inputText>
+		</h:panelGrid>
+		<br/>
+		<p:commandButton style="margin-left: 750px; background-color : aqua" value="Login" action="#{adminMB.identifierAdmin}"></p:commandButton>
+	
+
+	</h:form>
+	<h:messages style="text-align: center; color:red"></h:messages>
+</h:body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Page Panier</title>
+
+</h:head>
+
+<h:body>
+	<!-- Insertion du header -->
+	<ui:insert name="header"></ui:insert>
+	<ui:include src="template/header.xhtml"></ui:include>
+
+	<h:graphicImage library="pictures" name="soleil.gif"
+		style="position: absolute; right: 80px;" width="100" height="100"></h:graphicImage>
+
+
+	<h1 style="text-align: center; color: blue">Votre Panier</h1>
+	<hr />
+
+	<h:form>
+		<p:dataTable
+			style="background-color: white ; width: 900px ; center ; margin-left : 175px"
+			var="lc" value="#{sessionScope.listeLCPanier}">
+			<p:column headerText="Id Ligne Commande">
+				<h:outputText value="#{lc.idLigneCommande}" />
+			</p:column>
+
+			<p:column headerText="ID Produit">
+				<h:outputText value="#{lc.produit.idProduit}" />
+			</p:column>
+
+			<p:column headerText="Quantitén">
+				<h:outputText value="#{lc.quantite}" />
+			</p:column>
+
+			<p:column headerText="Prix">
+				<h:outputText value="#{lc.prix}" />
+			</p:column>
+
+
+		</p:dataTable>
+		<br />
+		<h:commandButton style="position: absolute; right:250px;"
+			value="Valider la commande" action="#{cMB.ajouterComande}" />
+
+
+	</h:form>
+</h:body>
+</html>

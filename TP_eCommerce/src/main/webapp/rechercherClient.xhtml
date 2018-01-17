@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+	<title>Rechercher un client</title>
+</h:head>
+
+<h:body>
+
+	<ui:insert name="header"></ui:insert>
+	<ui:include src="template/header.xhtml"></ui:include>
+
+
+
+
+	<h1
+		style="text-align: center; color: red; margin-top: 50px; margin-left: -800px">Formulaire
+		de recherche d'un client</h1>
+
+	<h:form
+		style="background-color: white ;width: 400px; margin-left: 75px ; margin-top:50px">
+		<h:panelGrid columns="2">
+ID Client : <p:inputText id="idCl" label="ID CL"
+				value="#{clMB.client.idClient}" required="true"></p:inputText>
+
+			<br />
+			<br />
+
+			<h:commandButton style="center" value="Rechercher un client"
+				action="#{clMB.rechercherClient}" />
+
+		</h:panelGrid>
+
+
+	</h:form>
+
+	<h1
+		style="color: red; text-align: center; margin-top: 50px; margin-left: -800px">Client
+		recherché</h1>
+
+
+	<p:dataTable style="width: 1000px ; center ; margin-left : 75px"
+		var="cl" value="#{clMB.client}">
+		<p:column headerText="Id">
+			<h:outputText value="#{cl.idClient}" />
+		</p:column>
+		<br />
+		<p:column headerText="Nom">
+			<h:outputText value="#{cl.nomClient}" />
+		</p:column>
+		<br />
+		<p:column headerText="Adresse">
+			<h:outputText value="#{cl.adresseClient}" />
+		</p:column>
+		<br />
+		<p:column headerText="Email">
+			<h:outputText value="#{cl.email}" />
+		</p:column>
+		<br />
+		<p:column headerText="N° de téléphone">
+			<h:outputText value="#{cl.tel}" />
+		</p:column>
+
+	</p:dataTable>
+
+
+
+
+</h:body>
+
+
+</html>
