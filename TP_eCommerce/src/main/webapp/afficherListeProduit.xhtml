@@ -45,8 +45,16 @@
 				<h:outputText value="#{pro.description}" />
 			</p:column>
 
-			<p:column headerText="Prix">
+			<p:column headerText="Ancien Prix">
 				<h:outputText value="#{pro.prix}" />
+			</p:column>
+			
+			<p:column headerText="Reduction">
+				<h:outputText value="#{pro.reduction}" />
+			</p:column>
+			
+			<p:column headerText="Nouveau Prix">
+				<h:outputText value="#{pro.prix * pro.reduction/100}" />
 			</p:column>
 
 			<p:column headerText="Quantité">

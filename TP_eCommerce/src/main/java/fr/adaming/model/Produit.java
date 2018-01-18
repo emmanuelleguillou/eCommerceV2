@@ -27,16 +27,17 @@ public class Produit implements Serializable {
 	private String description;
 	private double prix;
 	private int quantite;
-
+	@Column(columnDefinition = "double default 0")
+	private double reduction=0;
 	@Transient
 	private int nbProduit;
-	
+
 	@Column(columnDefinition = "boolean default false")
-	private boolean selectionne=false;
+	private boolean selectionne = false;
 
 	@Lob
 	private byte[] photo;
-	
+
 	@Transient
 	private String image;
 
@@ -55,8 +56,8 @@ public class Produit implements Serializable {
 	}
 
 	// constructeur sans id
-	public Produit(String designation, String description, double prix, int quantite, Boolean selectionne,
-			byte[] photo) {
+	public Produit(String designation, String description, double prix, int quantite, Boolean selectionne, byte[] photo,
+			double reduction) {
 		super();
 		this.designation = designation;
 		this.description = description;
@@ -64,11 +65,12 @@ public class Produit implements Serializable {
 		this.quantite = quantite;
 		this.selectionne = selectionne;
 		this.photo = photo;
+		this.reduction = reduction;
 	}
 
 	// COnstructeur avec id
 	public Produit(int idProduit, String designation, String description, double prix, int quantite,
-			Boolean selectionne, byte[] photo) {
+			Boolean selectionne, byte[] photo, double reduction) {
 		super();
 		this.idProduit = idProduit;
 		this.designation = designation;
@@ -77,6 +79,7 @@ public class Produit implements Serializable {
 		this.quantite = quantite;
 		this.selectionne = selectionne;
 		this.photo = photo;
+		this.reduction = reduction;
 	}
 
 	// getters et setters
@@ -136,10 +139,17 @@ public class Produit implements Serializable {
 		this.photo = photo;
 	}
 
+	public double getReduction() {
+		return reduction;
+	}
+
+	public void setReduction(double reduction) {
+		this.reduction = reduction;
+	}
+
 	public Categorie getCategorie() {
 		return categorie;
 	}
-	
 
 	public String getImage() {
 		return image;
@@ -152,7 +162,7 @@ public class Produit implements Serializable {
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
 	}
-	
+
 	public List<LigneCommande> getListeLigneCommande() {
 		return listeLigneCommande;
 	}
@@ -160,8 +170,6 @@ public class Produit implements Serializable {
 	public void setListeLigneCommande(List<LigneCommande> listeLigneCommande) {
 		this.listeLigneCommande = listeLigneCommande;
 	}
-	
-	
 
 	public int getNbProduit() {
 		return nbProduit;
@@ -174,7 +182,8 @@ public class Produit implements Serializable {
 	@Override
 	public String toString() {
 		return "Produit [idProduit=" + idProduit + ", designation=" + designation + ", description=" + description
-				+ ", prix=" + prix + ", quantite=" + quantite + ", categorie=" + categorie + "]";
+				+ ", prix=" + prix + ", quantite=" + quantite + ", categorie=" + categorie + ", reduction=" + reduction
+				+ "     ]";
 	}
 
 }
