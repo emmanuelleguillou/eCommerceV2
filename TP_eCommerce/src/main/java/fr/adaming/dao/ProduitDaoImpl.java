@@ -64,7 +64,7 @@ public class ProduitDaoImpl implements IProduitDao {
 	@Override
 	public Produit updateProduit(Produit p) {
 		Session s= sf.getCurrentSession();
-		s.update(p);
+		s.saveOrUpdate(p);
 		return p;
 	}
 

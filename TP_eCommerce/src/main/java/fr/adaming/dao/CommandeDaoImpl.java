@@ -73,7 +73,7 @@ public class CommandeDaoImpl implements ICommandeDao {
 		query.setParameter("idCl", idCl);
 
 		// création de la nouvelle liste des lignes commandes
-		List<Commande> listeCommande = (List<Commande>) query.uniqueResult();
+		List<Commande> listeCommande = (List<Commande>) query.list();
 
 		return listeCommande;
 	}

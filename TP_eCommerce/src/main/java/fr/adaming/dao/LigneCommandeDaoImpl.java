@@ -33,7 +33,7 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 	@Override
 	public LigneCommande updateLigneCommande(LigneCommande lc) {
 		Session s= sf.getCurrentSession();
-		s.update(lc);
+		s.saveOrUpdate(lc);
 		return lc;
 	}
 

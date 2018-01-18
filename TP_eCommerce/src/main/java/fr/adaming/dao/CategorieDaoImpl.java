@@ -52,7 +52,7 @@ public class CategorieDaoImpl implements ICategorieDao {
 	@Override
 	public Categorie updateCategorie(Categorie c) {
 		Session s= sf.getCurrentSession();
-		s.update(c);
+		s.saveOrUpdate(c);
 		return c;
 	}
 
