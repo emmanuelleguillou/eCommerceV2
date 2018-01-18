@@ -27,7 +27,7 @@
 
 	<hr />
 
-
+	<h:form>
 		<p:dataTable
 			style="background-color: white ; width: 900px ; center ; margin-left : 175px"
 			var="com" value="#{sessionScope.listeCommandes}">
@@ -40,18 +40,17 @@
 			</p:column>
 
 			<p:column>
-				<h:commandButton style="margin-left : 175px"
-					value="Afficher le détail"
-					action="#{lcMB.afficherLigneCommandeByIDCommande}" update="@all">
-					<f:setPropertyActionListener value="#{sessionScope.idCommande}"
+				<h:commandLink value="Afficher le détail"
+					rel="affichageCommandeETLC.xhtml" action="#{lcMB.afficherLigneCommandeByIDCommande}" >
+					<f:setPropertyActionListener
+						value="#{com.idCommande}"
 						target="#{lcMB.idCommande}" />
-				</h:commandButton>
+				</h:commandLink>
 			</p:column>
 
 
 		</p:dataTable>
-
-
+	</h:form>
 
 
 
