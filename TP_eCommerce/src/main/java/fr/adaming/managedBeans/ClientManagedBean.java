@@ -89,6 +89,14 @@ public class ClientManagedBean implements Serializable {
 		this.commande.setClient(this.client);
 		this.commande = commandeService.updateCommande(this.commande);
 
+		
+		//Une fois la commande créée on met à jour la liste des commandes par client
+		List<Commande> listeCommande = commandeService.gettAllCommande(this.client.getIdClient());
+		//passer la liste dans la session
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeCommandes",
+				listeCommande);
+		
+		
 		if (this.client.getIdClient() != 0) {
 			return "accueilClient";
 		} else {
@@ -127,6 +135,14 @@ public class ClientManagedBean implements Serializable {
 			// Passer le client dans la session
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("client", this.client);
 
+			
+			//Une fois la commande créée on met à jour la liste des commandes par client
+			List<Commande> listeCommande = commandeService.gettAllCommande(this.client.getIdClient());
+			//passer la liste dans la session
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeCommandes",
+					listeCommande);
+			
+			
 			return "accueilClient";
 		} else {
 			return "loginClient";

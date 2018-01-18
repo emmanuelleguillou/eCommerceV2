@@ -29,10 +29,22 @@
 
 				<p:menuitem value="Modifier votre compte" url="modifierClient.xhtml"
 					icon="ui-icon-wrench" />
-				<p:menuitem value="Supprimer votre compte" url="supprimerClient.xhtml"
-					icon="ui-icon-minus" />
+				<p:menuitem value="Supprimer votre compte"
+					url="supprimerClient.xhtml" icon="ui-icon-minus" />
 
 			</p:submenu>
+
+
+			<p:submenu label="Commandes" icon="ui-icon-person">
+
+				<p:menuitem value="Historique de vos commandes"
+					url="listeDesCommandes.xhtml" icon="ui-icon-plus" />
+				<p:menuitem value="Supprimer une commande de votre historique"
+					url="supprimerCommande.xhtml" icon="ui-icon-minus" />
+				<p:menuitem value="Rechercher une commande"
+					url="rechercherCommande.xhtml" />
+			</p:submenu>
+
 
 			<p:menuitem style="position: absolute; right: 10px;"
 				value="Retour au Site" url="accueil.xhtml" />
@@ -41,17 +53,8 @@
 
 	</h:form>
 
-<!--  
-			<p:submenu label="Commandes" icon="ui-icon-person">
 
-				<p:menuitem value="Historique de vos commandes"
-					url="listeDesCommandes.xhtml" icon="ui-icon-plus" />
-				<p:menuitem value="Supprimer une commande de votre historique"
-					url="supprimerLigneCommande.xhtml" icon="ui-icon-minus" />
-				<p:menuitem value="Rechercher une commande"
-					url="rechercherCommande.xhtml" />
-			</p:submenu>
--->
+
 
 
 </h:body>

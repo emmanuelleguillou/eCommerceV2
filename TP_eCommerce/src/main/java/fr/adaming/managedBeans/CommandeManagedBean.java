@@ -122,6 +122,7 @@ public class CommandeManagedBean implements Serializable {
 		
 		//On ajoute dans la sesion l'id de la commande pour le retrouver l'hors de l'affichage de la commande dans l'espace client
 		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("idCommande", this.commande.getIdCommande());
+		
 		if (this.commande != null) {
 			return "loginClient";
 		} else {
