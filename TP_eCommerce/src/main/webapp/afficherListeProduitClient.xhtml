@@ -25,8 +25,8 @@
 		<h:outputText value="#{sessionScope.nomCategorie}" />
 	</h1>
 	<hr />
+	<p:growl id="messages" />
 	<h:form>
-		<p:growl id="messages" />
 		<p:dataTable
 			style="background-color: white ; width: 900px ; center ; margin-left : 175px"
 			var="pro" value="#{prMB.listeProduit}">
@@ -51,17 +51,14 @@
 			</p:column>
 
 			<p:column headerText="Quantité souhaitée">
-				<h:form>
-
-					<h:inputText value="#{lcMB.ligneCommande.quantite}" />
-
-					<p:commandLink value="Ajouter au Panier"
-						action="#{lcMB.ajouterLigneCommande}" update="@all">
-						<f:setPropertyActionListener value="#{pro.idProduit}"
-							target="#{lcMB.produit.idProduit}"></f:setPropertyActionListener>
-					</p:commandLink>
-				</h:form>
+				<h:inputText value="#{lcMB.ligneCommande.quantite}" />
+				<p:commandLink value="Ajouter au Panier"
+					action="#{lcMB.ajouterLigneCommande}" update="@all">
+					<f:setPropertyActionListener value="#{pro.idProduit}"
+						target="#{lcMB.produit.idProduit}"></f:setPropertyActionListener>
+				</p:commandLink>
 			</p:column>
+
 		</p:dataTable>
 	</h:form>
 	<h:messages style="text-align: center; color:red"></h:messages>

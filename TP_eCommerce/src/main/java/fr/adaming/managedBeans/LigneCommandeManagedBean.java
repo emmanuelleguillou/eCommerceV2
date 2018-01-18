@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import fr.adaming.model.Commande;
@@ -18,8 +19,9 @@ import fr.adaming.service.ILigneCommandeService;
 import fr.adaming.service.IProduitService;
 
 @ManagedBean(name = "lcMB")
-// @SessionScoped
-@RequestScoped
+
+//@RequestScoped
+@ViewScoped
 public class LigneCommandeManagedBean implements Serializable {
 
 	@ManagedProperty(value="#{ligneCommandeService}")
@@ -111,6 +113,7 @@ public class LigneCommandeManagedBean implements Serializable {
 
 	// Les méthodes
 	public String ajouterLigneCommande() {
+		System.out.println("JE SUIS RENTER -----------------------------------------");
 		// récupération du produit par l'id entré
 		this.produit = produitService.getProduit(this.produit.getIdProduit());
 		System.out.println("LID DU PRODUIT EST" +this.produit.getIdProduit());
