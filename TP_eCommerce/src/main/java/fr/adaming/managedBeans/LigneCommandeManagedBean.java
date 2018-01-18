@@ -2,7 +2,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -20,15 +19,15 @@ import fr.adaming.service.IProduitService;
 
 @ManagedBean(name = "lcMB")
 
-//@RequestScoped
+// @RequestScoped
 @ViewScoped
 public class LigneCommandeManagedBean implements Serializable {
 
-	@ManagedProperty(value="#{ligneCommandeService}")
+	@ManagedProperty(value = "#{ligneCommandeService}")
 	private ILigneCommandeService ligneCommandeService;
-	@ManagedProperty(value="#{produitService}")
+	@ManagedProperty(value = "#{produitService}")
 	private IProduitService produitService;
-	@ManagedProperty(value="#{commandeService}")
+	@ManagedProperty(value = "#{commandeService}")
 	private ICommandeService commandeService;
 
 	private LigneCommande ligneCommande;
@@ -45,16 +44,15 @@ public class LigneCommandeManagedBean implements Serializable {
 		this.listeLigneCommande = new ArrayList<LigneCommande>();
 
 	}
-	//Injection des dépendances
+
+	// Injection des dépendances
 	public void setLigneCommandeService(ILigneCommandeService ligneCommandeService) {
 		this.ligneCommandeService = ligneCommandeService;
 	}
 
-
 	public void setProduitService(IProduitService produitService) {
 		this.produitService = produitService;
 	}
-
 
 	public void setCommandeService(ICommandeService commandeService) {
 		this.commandeService = commandeService;
@@ -64,7 +62,6 @@ public class LigneCommandeManagedBean implements Serializable {
 	public LigneCommande getLigneCommande() {
 		return ligneCommande;
 	}
-
 
 	public void setLigneCommande(LigneCommande ligneCommande) {
 		this.ligneCommande = ligneCommande;
@@ -94,7 +91,6 @@ public class LigneCommandeManagedBean implements Serializable {
 		this.indice = indice;
 	}
 
-
 	public List<LigneCommande> getListeLigneCommande() {
 		return listeLigneCommande;
 	}
@@ -116,14 +112,14 @@ public class LigneCommandeManagedBean implements Serializable {
 		System.out.println("JE SUIS RENTER -----------------------------------------");
 		// récupération du produit par l'id entré
 		this.produit = produitService.getProduit(this.produit.getIdProduit());
-		System.out.println("LID DU PRODUIT EST" +this.produit.getIdProduit());
-		
+		System.out.println("LID DU PRODUIT EST" + this.produit.getIdProduit());
+
 		// spécification du produit pour la ligne de commande
 		this.ligneCommande.setProduit(this.produit);
 		// calcul du prix total
 		this.ligneCommande.setPrix(ligneCommandeService.calculPrixLigneCommande(this.ligneCommande, this.produit));
 
-		if(this.produit.getQuantite() >= 0) {
+		if (this.produit.getQuantite() >= 0) {
 			// modification de la quantité de produit en stock
 			int quantiteRestante = this.produit.getQuantite() - this.ligneCommande.getQuantite();
 
@@ -138,16 +134,16 @@ public class LigneCommandeManagedBean implements Serializable {
 			}
 
 		}
-		
-		//pour envoyer les lignes commandes dans le panier
-		//récupérer toutes les lignes de commandes avec un id comande null (car non validée)
-		this.listeLigneCommande=ligneCommandeService.getAllLignesCommandes();
-		
-		//Passer la liste des lignes commandes dans la session
-		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeLCPanier", this.listeLigneCommande);
-		
 
-		
+		// pour envoyer les lignes commandes dans le panier
+		// récupérer toutes les lignes de commandes avec un id comande null (car
+		// non validée)
+		this.listeLigneCommande = ligneCommandeService.getAllLignesCommandes();
+
+		// Passer la liste des lignes commandes dans la session
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeLCPanier",
+				this.listeLigneCommande);
+
 		if (this.ligneCommande.getIdLigneCommande() != 0) {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage("Success", "Ligne de commande ajoutée"));
@@ -214,9 +210,16 @@ public class LigneCommandeManagedBean implements Serializable {
 		for (LigneCommande ligneCommande : this.listeLigneCommande) {
 			System.out.println(ligneCommande);
 		}
-
 		this.commande = commandeService.getCommande(this.idCommande);
-		return "accueilClient";
+
+		if (this.commande != null) {
+
+			return "CommandeOK";
+		} else {
+
+			return "CommandeKO";
+		}
+
 	}
 
 }
