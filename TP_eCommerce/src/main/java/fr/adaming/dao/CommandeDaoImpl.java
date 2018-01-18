@@ -33,7 +33,7 @@ public class CommandeDaoImpl implements ICommandeDao {
 	@Override
 	public Commande updateCommande(Commande c) {
 		Session s= sf.getCurrentSession();
-		s.update(c);
+		s.saveOrUpdate(c);
 		return c;
 	}
 
