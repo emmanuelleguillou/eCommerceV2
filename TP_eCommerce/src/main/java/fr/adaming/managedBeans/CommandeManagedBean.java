@@ -48,11 +48,21 @@ public class CommandeManagedBean implements Serializable {
 		this.client = new Client();
 		this.ligneCommande = new LigneCommande();
 	}
+	//Injection des dépendances
+	public void setCommandeService(ICommandeService commandeService) {
+		this.commandeService = commandeService;
+	}
+
+
+	public void setLigneCommandeService(ILigneCommandeService ligneCommandeService) {
+		this.ligneCommandeService = ligneCommandeService;
+	}
 
 	// getters et setters
 	public Commande getCommande() {
 		return commande;
 	}
+
 
 	public long getIdCommande() {
 		return idCommande;
