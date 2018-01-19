@@ -2,6 +2,7 @@ package fr.adaming.dao;
 
 import java.util.List;
 
+import fr.adaming.model.Commande;
 import fr.adaming.model.LigneCommande;
 import fr.adaming.model.Produit;
 
@@ -21,5 +22,6 @@ public interface ILigneCommandeDao {
 	
 	public List<LigneCommande> getAllLignesCommandes();
 	
+	public double calculPrixToutesLignesCommandes(List<LigneCommande> listeLC);
 	
 }

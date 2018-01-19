@@ -8,7 +8,34 @@
 			spring fasse al différence entre le el de jsf et le el de spring -->
 		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
 	</application>
-	
-	
-	
+
+	<navigation-rule>
+		<from-view-id>accueilClient.xhtml</from-view-id>
+
+		<navigation-case>
+			<from-outcome>CommandeOK</from-outcome>
+			<to-view-id>accueilClient.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>CommandeKO</from-outcome>
+			<to-view-id>accueilClient.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>listeDesCommandes.xhtml</from-view-id>
+
+		<navigation-case>
+			<from-outcome>CommandeOK</from-outcome>
+			<to-view-id>affichageCommandeETLC.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>CommandeKO</from-outcome>
+			<to-view-id>listeDesCommandes.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+
 </faces-config>

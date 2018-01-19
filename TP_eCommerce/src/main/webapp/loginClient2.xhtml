@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Page Login</title>
+</h:head>
+<h:body
+	style="background: url('resources/pictures/fod4.jpg.jpg') no-repeat center; background-size: cover">
+
+	<h:graphicImage library="pictures" name="soleil.gif"
+		style="position: absolute; right: 80px;" width="150" height="150"></h:graphicImage>
+
+	<h1 style="text-align: center; color: blue">Enregistrement du
+		client</h1>
+
+	<hr />
+
+	<h2 style="text-align: center; color: blue; margin-top: 50px">Connectez-vous</h2>
+
+
+	<h:form>
+		<h:panelGrid
+			style="background-color: white ;width: 250px; margin-left: 475px ; margin-top:50px"
+			columns="2">
+		Nom : <h:inputText value="#{clMB.client.nomClient}"></h:inputText>
+			<br />
+		Mail : <h:inputText value="#{clMB.client.email}"></h:inputText>
+			<br />
+
+		</h:panelGrid>
+		<br />
+		<h:commandButton
+			style="center; margin-left : 500px; background-color : aqua"
+			value="Login" action="#{clMB.connexionClient}" />
+	</h:form>
+
+</h:body>
+</html>

@@ -69,4 +69,10 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService {
 		return listeOut;
 	}
 
+	@Override
+	public double calculPrixToutesLignesCommandes(List<LigneCommande> listeLC) {
+		double prixTotal = ligneCommandeDao.calculPrixToutesLignesCommandes(listeLC);
+		return prixTotal;
+	}
+
 }

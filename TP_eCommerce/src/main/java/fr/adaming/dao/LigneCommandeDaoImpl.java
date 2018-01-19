@@ -99,4 +99,15 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 		return listeLigneCommande;
 	}
 
+	@Override
+	public double calculPrixToutesLignesCommandes(List<LigneCommande> listeLC) {
+		double sommePrix=0;
+		for (LigneCommande element : listeLC) {
+			sommePrix += element.getPrix();
+		}
+		System.out.println("sommePrix -------------------------------" +sommePrix);
+		
+		return sommePrix;
+	}
+
 }

@@ -40,12 +40,12 @@
 			</p:column>
 
 			<p:column>
-				<h:commandLink value="Afficher le détail"
-					rel="affichageCommandeETLC.xhtml" action="#{lcMB.afficherLigneCommandeByIDCommande}" >
-					<f:setPropertyActionListener
-						value="#{com.idCommande}"
-						target="#{lcMB.idCommande}" />
-				</h:commandLink>
+				<h:commandButton value="Afficher le détail"
+					action="#{lcMB.afficherLigneCommandeByIDCommande}">
+					<f:setPropertyActionListener value="#{com.idCommande}"
+						target="#{sessionScope.idCommande}" />
+
+				</h:commandButton>
 			</p:column>
 
 

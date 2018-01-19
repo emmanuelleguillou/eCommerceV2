@@ -36,12 +36,16 @@ ID Commande : <p:inputText id="idC" label="ID Commande" value="#{cMB.commande.id
 			<br />
 
 			<h:commandButton style="center" value="Rechercher la commande"
-				action="#{cMB.rechercherCommandeIDC}" />
+				action="#{cMB.rechercherCommandeIDC}" >
+				<f:setPropertyActionListener value="#{cMB.commande.idCommande}"
+				target="#{sessionScope.idCommande}" />
+				</h:commandButton>
 
 		</h:panelGrid>
 
 
 	</h:form>
+
 
 
 	<h:form>
@@ -90,11 +94,6 @@ ID Commande : <p:inputText id="idC" label="ID Commande" value="#{cMB.commande.id
 		</p:dataTable>
 
 		
-		<h:commandButton style="margin-left : 175px" value="Valider la commande"
-			action="#{cMB.envoyerFacture}">
-			<f:setPropertyActionListener value="#{sessionScope.idCommande}"
-				target="#{cMB.idCommande}" />
-		</h:commandButton>
 	</h:form>
 
 

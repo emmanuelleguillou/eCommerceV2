@@ -3,6 +3,8 @@ package fr.adaming.dao;
 import java.util.List;
 
 import fr.adaming.model.Commande;
+import fr.adaming.model.LigneCommande;
+import fr.adaming.model.Produit;
 
 
 public interface ICommandeDao {
@@ -18,6 +20,7 @@ public interface ICommandeDao {
 	public List<Commande> gettAllCommande(long idCl);
 	
 	public Commande getCommande(long idCommande);
+	
 	
 	
 }

@@ -3,6 +3,7 @@ package fr.adaming.service;
 import java.util.List;
 
 import fr.adaming.model.Commande;
+import fr.adaming.model.LigneCommande;
 
 
 public interface ICommandeService {
@@ -18,5 +19,6 @@ public interface ICommandeService {
 	public List<Commande> gettAllCommande(long idCl);
 	
 	public Commande getCommande(long idCommande);
-
+	
+	
 }

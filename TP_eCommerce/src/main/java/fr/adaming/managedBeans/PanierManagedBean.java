@@ -37,7 +37,8 @@ public class PanierManagedBean implements Serializable {
 	private List<LigneCommande> listeLignecommande;
 	private long idCommande;
 	private Commande commande;
-	// public static final String chemin = "C:/Users/PDT/testPdf.pdf";
+	private double prixTotal;
+	
 
 	// constructeur par défaut
 	public PanierManagedBean() {
@@ -99,6 +100,14 @@ public class PanierManagedBean implements Serializable {
 
 	public void setCommande(Commande commande) {
 		this.commande = commande;
+	}
+
+	public double getPrixTotal() {
+		return prixTotal;
+	}
+
+	public void setPrixTotal(double prixTotal) {
+		this.prixTotal = prixTotal;
 	}
 
 	// Les méthodes
@@ -204,16 +213,6 @@ public class PanierManagedBean implements Serializable {
 		return "accueilClient";
 	}
 	
-	//pour envoyer les lignes commandes dans le panier
-	public String envoyerPanier() {
-		//récupérer toutes les lignes de commandes avec un id comande null (car non validée)
-		this.listeLignecommande=ligneCommandeService.getAllLignesCommandes();
-		
-		//Passer la liste des lignes commandes dans la session
-		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeLCPanier", this.listeLignecommande);
-		
-				
-		return "panier" ;
-	}
+
 	
 }

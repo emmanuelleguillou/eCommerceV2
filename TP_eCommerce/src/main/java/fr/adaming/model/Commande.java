@@ -30,29 +30,32 @@ public class Commande implements Serializable {
 									// dans le package util.Date, celui de
 	// la BD est de type sql.Date. C'est pourquoi on doit utiliser temporal
 	private Date dateCommande = new Date();
-
+	private double prix;
+	
 	// Transformation des associations uml en java
 	@ManyToOne
 	@JoinColumn(name = "client_id", referencedColumnName = "idClient")
 	private Client client;
 
 	@OneToMany
-	@JoinColumn(referencedColumnName="idCommande")
+	@JoinColumn(referencedColumnName = "idCommande")
 	private List<LigneCommande> ListeLigneCommande;
 
 	public Commande() {
 		super();
 	}
 
-	public Commande(Date dateCommande) {
+	public Commande(Date dateCommande, double prix) {
 		super();
 		this.dateCommande = dateCommande;
+		this.prix = prix;
 	}
 
-	public Commande(Long idCommande, Date dateCommande) {
+	public Commande(Long idCommande, Date dateCommande, double prix) {
 		super();
 		this.idCommande = idCommande;
 		this.dateCommande = dateCommande;
+		this.prix = prix;
 	}
 
 	public Long getIdCommande() {
@@ -85,6 +88,14 @@ public class Commande implements Serializable {
 
 	public void setListeLigneCommande(List<LigneCommande> listeLigneCommande) {
 		ListeLigneCommande = listeLigneCommande;
+	}
+
+	public double getPrix() {
+		return prix;
+	}
+
+	public void setPrix(double prix) {
+		this.prix = prix;
 	}
 	
 	

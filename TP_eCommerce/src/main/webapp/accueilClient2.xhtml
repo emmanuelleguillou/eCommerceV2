@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+	<title>Page accueil</title>
+
+
+</h:head>
+
+<h:body>
+	<!-- Insertion du header -->
+	<ui:insert name="headerClient" />
+	<ui:include src="template/headerClient.xhtml" />
+
+	<h:graphicImage library="pictures" name="soleil.gif"
+		style="position: absolute; right: 80px;" width="100" height="100"></h:graphicImage>
+
+
+	<h1 style="text-align: center; color: blue">Bienvenue dans votre espace client</h1>
+		
+
+
+</h:body>
+</html>

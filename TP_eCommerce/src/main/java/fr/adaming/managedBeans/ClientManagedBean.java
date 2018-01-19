@@ -1,12 +1,12 @@
 import java.io.Serializable;
 import java.util.List;
 
-
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
@@ -18,9 +18,9 @@ import fr.adaming.service.ICommandeService;
 @RequestScoped
 public class ClientManagedBean implements Serializable {
 
-	@ManagedProperty(value="#{clientService}")
+	@ManagedProperty(value = "#{clientService}")
 	private IClientService clientService;
-	@ManagedProperty(value="#{commandeService}")
+	@ManagedProperty(value = "#{commandeService}")
 	private ICommandeService commandeService;
 
 	private Client client;
@@ -33,19 +33,15 @@ public class ClientManagedBean implements Serializable {
 		this.client = new Client();
 	}
 
-	//Injection des dépendances
-	
+	// Injection des dépendances
+
 	public void setClientService(IClientService clientService) {
 		this.clientService = clientService;
 	}
 
-
-
 	public void setCommandeService(ICommandeService commandeService) {
 		this.commandeService = commandeService;
 	}
-
-
 
 	public Client getClient() {
 		return client;
@@ -89,14 +85,12 @@ public class ClientManagedBean implements Serializable {
 		this.commande.setClient(this.client);
 		this.commande = commandeService.updateCommande(this.commande);
 
-		
-		//Une fois la commande créée on met à jour la liste des commandes par client
+		// Une fois la commande créée on met à jour la liste des commandes par
+		// client
 		List<Commande> listeCommande = commandeService.gettAllCommande(this.client.getIdClient());
-		//passer la liste dans la session
-		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeCommandes",
-				listeCommande);
-		
-		
+		// passer la liste dans la session
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeCommandes", listeCommande);
+
 		if (this.client.getIdClient() != 0) {
 			return "accueilClient";
 		} else {
@@ -120,8 +114,7 @@ public class ClientManagedBean implements Serializable {
 
 	public String rechercherClient() {
 		Client clOut = clientService.getClientByNomEmail(this.client.getNomClient(), this.client.getEmail());
-		
-		
+
 		if (clOut != null) {
 			this.client = clOut;
 
@@ -135,14 +128,12 @@ public class ClientManagedBean implements Serializable {
 			// Passer le client dans la session
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("client", this.client);
 
-			
-			//Une fois la commande créée on met à jour la liste des commandes par client
+			// Une fois la commande créée on met à jour la liste des commandes
+			// par client
 			List<Commande> listeCommande = commandeService.gettAllCommande(this.client.getIdClient());
-			//passer la liste dans la session
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeCommandes",
-					listeCommande);
-			
-			
+			// passer la liste dans la session
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeCommandes", listeCommande);
+
 			return "accueilClient";
 		} else {
 			return "loginClient";
@@ -167,6 +158,27 @@ public class ClientManagedBean implements Serializable {
 	public void deconnexionClient() {
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 
+	}
+
+	public String connexionClient() {
+		Client clOut = clientService.getClientByNomEmail(this.client.getNomClient(), this.client.getEmail());
+
+		if (clOut != null) {
+			this.client = clOut;
+			// Passer le client dans la session
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("client", this.client);
+
+			// MAJ de la liste des commandes par client
+			List<Commande> listeCommande = commandeService.gettAllCommande(this.client.getIdClient());
+			// passer la liste dans la session
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeCommandes", listeCommande);
+
+			
+			
+			return "accueilClient2";
+		} else {
+			return "loginClient2";
+		}
 	}
 
 }

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import fr.adaming.dao.ICommandeDao;
 import fr.adaming.model.Commande;
+import fr.adaming.model.LigneCommande;
 
 @Service("commandeService")
 @Transactional
@@ -61,5 +62,7 @@ public class CommandeServiceImpl implements ICommandeService {
 		Commande cOut = commandeDao.getCommande(idCommande);
 		return cOut;
 	}
+
+
 
 }

@@ -22,5 +22,6 @@ public interface ILigneCommandeService {
 	
 	public List<LigneCommande> getAllLignesCommandes();
 	
+	public double calculPrixToutesLignesCommandes(List<LigneCommande> listeLC);
 	
 }

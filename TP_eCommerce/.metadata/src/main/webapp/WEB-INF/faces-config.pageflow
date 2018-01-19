@@ -1,2 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pageflow:Pageflow xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15162025835467" configfile="/TP_eCommerce/src/main/webapp/WEB-INF/faces-config.xml"/>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15162025835467" configfile="/TP_eCommerce/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="accueilClient" id="pf15163012318090" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" outlinks="pf15163019221477 pf15163019221478" inlinks="pf15163019221477 pf15163019221478" path="accueilClient.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="accueilClien" id="pf15163014605123" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf151630192214810 pf151630611766816" inlinks="pf151630192214810" path="listeDesCommandes.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="affichageCommandeETLC.xhtml" id="pf151630611766817" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf151630611766816" path="affichageCommandeETLC.xhtml"/>
+  <links id="pf15163019221477" target="pf15163012318090" source="pf15163012318090" outcome="CommandeOK"/>
+  <links id="pf15163019221478" target="pf15163012318090" source="pf15163012318090" outcome="CommandeKO"/>
+  <links id="pf151630192214810" target="pf15163014605123" source="pf15163014605123" outcome="CommandeKO"/>
+  <links id="pf151630611766816" target="pf151630611766817" source="pf15163014605123" outcome="CommandeOK"/>
+</pageflow:Pageflow>

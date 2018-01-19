@@ -22,7 +22,7 @@
 		style="position: absolute; right: 80px;" width="100" height="100"></h:graphicImage>
 
 
-	<h1 style="text-align: center; color: blue">Commande <h:outputText value="#{lcMB.idCommande}" /></h1>
+	<h1 style="text-align: center; color: blue">Commande <h:outputText value="#{sessionScope.idCommande}" /></h1>
 		
 			<hr />
 
@@ -63,13 +63,8 @@
 
 		</p:dataTable>
 
-		
-		<h:commandButton style="margin-left : 175px" value="Valider la commande"
-			action="#{cMB.envoyerFacture}">
-			<f:setPropertyActionListener value="#{sessionScope.idCommande}"
-				target="#{cMB.idCommande}" />
-		</h:commandButton>
 	</h:form>
+
 
 
 </h:body>
