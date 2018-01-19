@@ -34,15 +34,26 @@
 			<p:column headerText="ID Produit">
 				<h:outputText value="#{lc.produit.idProduit}" />
 			</p:column>
+			
+			<p:column headerText="Designation">
+				<h:outputText value="#{lc.produit.designation}" />
+			</p:column>
 
-			<p:column headerText="Quantitén">
+			<p:column headerText="Quantité">
 				<h:outputText value="#{lc.quantite}" />
 			</p:column>
 
 			<p:column headerText="Prix">
 				<h:outputText value="#{lc.prix}" />
 			</p:column>
+			
+			<p:column headerText="Réduction">
+				<h:outputText value="#{lc.produit.reduction}" />
+			</p:column>
 
+			<p:column headerText="Nouveau Prix">
+				<h:outputText value="#{lc.produit.prix * lc.produit.reduction/100 *lc.quantite}" />
+			</p:column>
 
 		</p:dataTable>
 		<br />
