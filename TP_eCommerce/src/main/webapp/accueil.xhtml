@@ -9,26 +9,28 @@
 <h:head>
 
 	<title>Page accueil</title>
-<f:metadata>
-<!-- Pour appeler la methode au chargement -->
-   <f:event listener="#{adminMB.testAffichage}" type="preRenderView"></f:event> 
-</f:metadata>
+	<f:metadata>
+		<!-- Pour appeler la methode au chargement -->
+		<f:event listener="#{adminMB.testAffichage}" type="preRenderView"></f:event>
+	</f:metadata>
 
 </h:head>
 
 <h:body>
-	
+
 	<!-- Insertion du header -->
 	<ui:insert name="header"></ui:insert>
 	<ui:include src="template/header.xhtml"></ui:include>
-	
-	<h:graphicImage library="pictures" name="soleil.gif" style="position: absolute; right: 80px;"  width="100" height="100"></h:graphicImage>
-	
+
+	<h:graphicImage library="pictures" name="soleil.gif"
+		style="position: absolute; right: 80px;" width="100" height="100"></h:graphicImage>
+
 	<h1 style="text-align: center; color: blue">Liste des categories</h1>
 	<hr />
-	
 
-	<p:dataTable var="cat" value="#{sessionScope.categoriesList}" style="background-color: white ; width: 900px ; center ; margin-left : 175px">
+
+	<p:dataTable var="cat" value="#{sessionScope.categoriesList}"
+		style="background-color: white ; width: 900px ; center ; margin-left : 175px">
 		<p:column headerText="Photo">
 			<h:graphicImage value="#{cat.image}" width="200" height="200"></h:graphicImage>
 		</p:column>
@@ -41,7 +43,7 @@
 			<h:outputText value="#{cat.description}" />
 		</p:column>
 
-		
+
 
 		<p:column headerText="Operations">
 			<h:form>
@@ -54,9 +56,14 @@
 			</h:form>
 		</p:column>
 
-	</p:dataTable><h:form>
-	
+	</p:dataTable>
+	<h:form>
+		<p:inputText value="#{rechMB.req}">
+			<p:ajax event="keyup" listener="#{rechMB.recherche}" />
+		</p:inputText>
 	</h:form>
-	
+
+
+
 </h:body>
 </html>

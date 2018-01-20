@@ -17,4 +17,6 @@ public interface IProduitDao {
 	public List<Produit> getAllPorduit();
 
 	public List<Produit> getAllPorduitByCategorie(int id_c);
+	
+	public List<Produit> getSearchProduct(String req);
 }

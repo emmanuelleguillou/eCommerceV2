@@ -47,4 +47,9 @@ public class ProduitServiceImpl implements IProduitService{
 		return produitDao.getAllPorduitByCategorie(id_c);
 	}
 
+	@Override
+	public List<Produit> getSearchProduct(String req) {
+		return produitDao.getSearchProduct(req);
+	}
+
 }

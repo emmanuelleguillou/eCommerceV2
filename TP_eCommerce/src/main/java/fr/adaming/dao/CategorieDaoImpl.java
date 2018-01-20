@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import fr.adaming.model.Categorie;
+import fr.adaming.model.Produit;
 
 
 @Repository
@@ -64,6 +65,19 @@ public class CategorieDaoImpl implements ICategorieDao {
 		// Creer un query
 		Query query = s.createQuery(req);
 
+		// Envoyer la requete
+		return query.list();
+	}
+	
+	@Override
+	public List<Categorie> getSearchCategorie(String req) {
+		Session s= sf.getCurrentSession();
+		// Creation de la requete JPQL
+		String requete= "from Categorie as c WHERE c.nomCategorie LIKE :searchKeyword";
+		// Creer un query
+		Query query = s.createQuery(requete);
+		
+		query.setParameter("searchKeyword", req+"%");
 		// Envoyer la requete
 		return query.list();
 	}

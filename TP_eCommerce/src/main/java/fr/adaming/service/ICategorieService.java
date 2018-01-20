@@ -17,4 +17,6 @@ public interface ICategorieService {
 	public Categorie updateCategorie(Categorie c);
 	
 	public List<Categorie> getAllCategorie();
+	
+	public List<Categorie> getSearchCategorie(String req);
 }

@@ -42,4 +42,9 @@ public class CategorieServiceImpl implements ICategorieService {
 		return categorieDao.getAllCategorie();
 	}
 
+	@Override
+	public List<Categorie> getSearchCategorie(String req) {
+		return categorieDao.getSearchCategorie(req);
+	}
+
 }
