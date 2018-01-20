@@ -118,7 +118,6 @@ public class LigneCommandeManagedBean implements Serializable {
 
 	// Les méthodes
 	public String ajouterLigneCommande() {
-		System.out.println("JE SUIS RENTRER -----------------------------------------");
 		// récupération du produit par l'id entré
 		this.produit = produitService.getProduit(this.produit.getIdProduit());
 		// System.out.println("L'ID DU PRODUIT EST : " +

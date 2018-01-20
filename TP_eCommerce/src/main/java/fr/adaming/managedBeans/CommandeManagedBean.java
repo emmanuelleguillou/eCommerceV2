@@ -103,18 +103,30 @@ public class CommandeManagedBean implements Serializable {
 
 	// Les méthodes
 	public String ajouterComande() {
+		
 		//Créer une commande
 		this.commande = commandeService.addCommande(this.commande);
 		
 		//récupérer toutes les lignes de commandes avec un idCommande null
 		this.listeLigneCommande = ligneCommandeService.getAllLignesCommandes();
-		
+		double prixTotalC=0;
+		double prixTotalRemise=0;
 		//Donner à chaque ligne de commande l'id de la commande créée
 		for (LigneCommande lc : this.listeLigneCommande) {
 			lc.setCommandes(this.commande);
 			this.ligneCommande = ligneCommandeService.updateLigneCommande(lc);
+			prixTotalC=prixTotalC+lc.getPrix();
+			prixTotalRemise=prixTotalRemise + lc.getPrix() * (1- lc.getProduit().getReduction()/100);
 			System.out.println("commande de la lc : " + this.ligneCommande);
 		}
+		
+		//Injecte le prix total dans la commande
+		this.commande.setPrix(prixTotalC);
+		this.commande.setPrixRemise(prixTotalRemise);
+		this.commande= commandeService.updateCommande(this.commande);
+		
+		
+		
 
 		//générer une nouvelle liste des ligne commande qui sont associées à la commande
 		this.listeLigneCommande = ligneCommandeService.getAllLigneCommandeByIdCommande(this.commande.getIdCommande());
@@ -201,21 +213,23 @@ public class CommandeManagedBean implements Serializable {
 			table.addCell("Id Produit");
 			table.addCell("Produit");
 			table.addCell("Prix unitaire");
+			table.addCell("Prix unitaire après remise");
 			table.addCell("Quantité");
 			table.addCell("Prix total");
-			double prixT=0;
+			table.addCell("Prix total après remise");
 			for (LigneCommande ligneCommande : this.listeLigneCommande) {
 				table.addCell(Integer.toString(ligneCommande.getIdLigneCommande()));
 				table.addCell(Integer.toString(ligneCommande.getProduit().getIdProduit()));
 				table.addCell(ligneCommande.getProduit().getDesignation());
 				table.addCell(Double.toString(ligneCommande.getProduit().getPrix()));
+				table.addCell(Double.toString(ligneCommande.getProduit().getReduction()));
 				table.addCell(Integer.toString(ligneCommande.getQuantite()));
 				table.addCell(Double.toString(ligneCommande.getPrix()));
-				prixT=prixT+ligneCommande.getPrix();
+				table.addCell(Double.toString(ligneCommande.getPrix()*(1-ligneCommande.getProduit().getReduction())));
 			}
 			
-			Phrase p2 = new Phrase("Total de la commande : " +prixT +"€");
-			
+			Phrase p2 = new Phrase("Total de la commande : " +this.commande.getPrix() +"€");
+			Phrase p3 = new Phrase("Total de la commande après remise : " +this.commande.getPrixRemise() +"€");
 			//Ajout des elements dans le documents
 			document.add(new Paragraph(c1));
 		
@@ -226,7 +240,7 @@ public class CommandeManagedBean implements Serializable {
 			
 			
 			document.add(new Paragraph(p2));
-			
+			document.add(new Paragraph(p3));
 			
 			
 		} catch (Exception e) {

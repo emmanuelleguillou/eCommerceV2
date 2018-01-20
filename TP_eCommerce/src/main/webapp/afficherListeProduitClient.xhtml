@@ -27,9 +27,8 @@
 	<hr />
 	<p:growl id="messages" />
 	<h:form>
-		<p:dataTable
-			style="background-color: white;  opacity: 0.75 ; width: 900px ; center ; margin-left : 175px"
-			var="pro" value="#{prMB.listeProduit}">
+		<p:dataTable var="pro" value="#{prMB.listeProduit}">
+
 			<p:column headerText="Photo">
 				<h:graphicImage value="#{pro.image}" width="200" height="200"></h:graphicImage>
 			</p:column>
@@ -43,15 +42,17 @@
 			</p:column>
 
 			<p:column headerText="Prix">
-				<h:outputText value="#{pro.prix}" />
+				<del>
+					<h:outputText value="#{pro.prix}" />
+				</del>
 			</p:column>
-			
-			<p:column headerText="Reduction">
+
+			<p:column headerText="Reduction %">
 				<h:outputText value="#{pro.reduction}" />
 			</p:column>
-			
+
 			<p:column headerText="Nouveau Prix">
-				<h:outputText value="#{pro.prix * pro.reduction/100}" />
+				<h:outputText value="#{pro.prix *(1- pro.reduction/100)}" />
 			</p:column>
 
 			<p:column headerText="Quantité en stock">
@@ -60,6 +61,7 @@
 
 			<p:column headerText="Quantité souhaitée">
 				<h:inputText value="#{lcMB.ligneCommande.quantite}" />
+
 				<p:commandLink value="Ajouter au Panier"
 					action="#{lcMB.ajouterLigneCommande}" update="@all">
 					<f:setPropertyActionListener value="#{pro.idProduit}"
@@ -68,8 +70,8 @@
 			</p:column>
 
 		</p:dataTable>
-	</h:form>
-	<h:messages style="text-align: center; color:red"></h:messages>
 
+		<h:messages style="text-align: center; color:red"></h:messages>
+	</h:form>
 </h:body>
 </html>

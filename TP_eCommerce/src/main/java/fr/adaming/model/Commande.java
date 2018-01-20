@@ -31,6 +31,7 @@ public class Commande implements Serializable {
 	// la BD est de type sql.Date. C'est pourquoi on doit utiliser temporal
 	private Date dateCommande = new Date();
 	private double prix;
+	private double prixRemise;
 	
 	// Transformation des associations uml en java
 	@ManyToOne
@@ -45,17 +46,19 @@ public class Commande implements Serializable {
 		super();
 	}
 
-	public Commande(Date dateCommande, double prix) {
+	public Commande(Date dateCommande, double prix, double prixRemise) {
 		super();
 		this.dateCommande = dateCommande;
 		this.prix = prix;
+		this.prixRemise=prixRemise;
 	}
 
-	public Commande(Long idCommande, Date dateCommande, double prix) {
+	public Commande(Long idCommande, Date dateCommande, double prix, double prixRemise) {
 		super();
 		this.idCommande = idCommande;
 		this.dateCommande = dateCommande;
 		this.prix = prix;
+		this.prixRemise=prixRemise;
 	}
 
 	public Long getIdCommande() {
@@ -97,6 +100,15 @@ public class Commande implements Serializable {
 	public void setPrix(double prix) {
 		this.prix = prix;
 	}
+
+	public double getPrixRemise() {
+		return prixRemise;
+	}
+
+	public void setPrixRemise(double prixRemise) {
+		this.prixRemise = prixRemise;
+	}
+	
 	
 	
 
