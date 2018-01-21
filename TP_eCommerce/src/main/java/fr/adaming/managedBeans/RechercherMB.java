@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 
 import fr.adaming.model.Categorie;
@@ -13,23 +14,24 @@ import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IProduitService;
 
 @ManagedBean(name = "rechMB")
-@ViewScoped
+@RequestScoped
 public class RechercherMB implements Serializable {
-	
-	@ManagedProperty(value="#{produitService}")
+
+	@ManagedProperty(value = "#{produitService}")
 	IProduitService produitService;
-	
-	@ManagedProperty(value="#{categorieService}")
+
+	@ManagedProperty(value = "#{categorieService}")
 	ICategorieService categorieService;
 
-	
 	private String req;
-	private List<Produit> listeProduitS;
-	private List<Categorie> listeCategorieS;
-	
-	
+	private List<Produit> listeProduitS=null;
+	private List<Categorie> listeCategorieS=null;
+
+	private boolean renderedProd = false;
+	private boolean renderedCat = false;
+
 	public RechercherMB() {
-		super();
+		
 	}
 
 	public void setProduitService(IProduitService produitService) {
@@ -40,8 +42,6 @@ public class RechercherMB implements Serializable {
 		this.categorieService = categorieService;
 	}
 
-
-	
 	public String getReq() {
 		return req;
 	}
@@ -50,8 +50,6 @@ public class RechercherMB implements Serializable {
 		this.req = req;
 	}
 
-	
-	
 	public List<Produit> getListeProduitS() {
 		return listeProduitS;
 	}
@@ -64,26 +62,44 @@ public class RechercherMB implements Serializable {
 		return listeCategorieS;
 	}
 
-	public void setListeCategorie(List<Categorie> listeCategorieS) {
+	public void setListeCategorieS(List<Categorie> listeCategorieS) {
 		this.listeCategorieS = listeCategorieS;
 	}
 
-	public String recherche(){
-		
-	this.listeProduitS=	produitService.getSearchProduct(this.req);
-	
-	this.listeCategorieS= categorieService.getSearchCategorie(this.req);
-	
-	System.out.println("LISTEEEEEEEEE");
-	
-	System.out.println(listeProduitS);
-	System.out.println(listeCategorieS);
-	System.out.println("FINN");
-		
-	if (listeProduitS==null && listeCategorieS==null){
-		return "pageRecherche";
+	public boolean isRenderedProd() {
+		return renderedProd;
 	}
-		
+
+	public void setRenderedProd(boolean renderedProd) {
+		this.renderedProd = renderedProd;
+	}
+
+	public boolean isRenderedCat() {
+		return renderedCat;
+	}
+
+	public void setRenderedCat(boolean renderedCat) {
+		this.renderedCat = renderedCat;
+	}
+
+	public String recherche() {
+
+		this.listeProduitS = produitService.getSearchProduct(this.req);
+
+		this.listeCategorieS = categorieService.getSearchCategorie(this.req);
+
+		System.out.println("LISTEEEEEEEEE");
+
+		System.out.println(listeProduitS);
+		System.out.println(listeCategorieS);
+		System.out.println("FINN");
+
+		if (listeProduitS != null)  {
+			this.renderedProd = true;
+		}
+		if (listeCategorieS != null)  {
+			this.renderedCat = true;
+		}
 		return "pageRecherche";
 	}
 }
