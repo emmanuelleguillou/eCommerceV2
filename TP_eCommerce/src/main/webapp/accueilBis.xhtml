@@ -7,29 +7,32 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>Page Accueil Admin</title>
+
+	<title>Page accueil</title>
+	<f:metadata>
+		<!-- Pour appeler la methode au chargement -->
+		<f:event listener="#{adminMB.testAffichage}" type="preRenderView"></f:event>
+	</f:metadata>
+
 </h:head>
 
 <h:body>
+
 	<!-- Insertion du header -->
 	<ui:insert name="header"></ui:insert>
-	<ui:include src="template/headerAdmin.xhtml"></ui:include>
+	<ui:include src="template/header.xhtml"></ui:include>
 
 	<h:graphicImage library="pictures" name="soleil.gif"
 		style="position: absolute; right: 80px;" width="100" height="100"></h:graphicImage>
 
-
 	<h1 style="text-align: center; color: blue">Liste des categories</h1>
-
 	<hr />
 
-	<p:dataTable style="background-color: white ; width: 900px ; center ; margin-left : 225px" var="cat" value="#{sessionScope.categoriesList}">
+
+	<p:dataTable var="cat" value="#{sessionScope.categoriesList}"
+		style="background-color: white ; width: 900px ; center ; margin-left : 175px">
 		<p:column headerText="Photo">
 			<h:graphicImage value="#{cat.image}" width="200" height="200"></h:graphicImage>
-		</p:column>
-
-		<p:column headerText="ID">
-			<h:outputText value="#{cat.idCategorie}" />
 		</p:column>
 
 		<p:column headerText="Nom">
@@ -44,21 +47,9 @@
 
 		<p:column headerText="Operations">
 			<h:form>
-				<p:commandLink value="Supprimer" action="#{caMB.supprimerCategorie}"
-					update="@all">
-					<f:setPropertyActionListener value="#{cat.idCategorie}"
-						target="#{caMB.categorie.idCategorie}"></f:setPropertyActionListener>
-				</p:commandLink>
 
-				<h:outputText value=" / " />
-				<p:commandLink value="Modifier" action="#{caMB.modifLien}">
-					<f:setPropertyActionListener value="#{cat.idCategorie}"
-						target="#{caMB.categorie.idCategorie}"></f:setPropertyActionListener>
-				</p:commandLink>
-
-				<h:outputText value=" / " />
-				<p:commandLink value="Afficher produit"
-					action="#{prMB.afficherParCategorie}">
+				<p:commandLink value="Afficher les produits"
+					action="#{prMB.afficherParCategorieClient}">
 					<f:setPropertyActionListener value="#{cat.idCategorie}"
 						target="#{prMB.idCategorie}"></f:setPropertyActionListener>
 				</p:commandLink>
@@ -66,7 +57,9 @@
 		</p:column>
 
 	</p:dataTable>
+	
+
+
 
 </h:body>
-
 </html>

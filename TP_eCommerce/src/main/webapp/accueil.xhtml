@@ -29,36 +29,62 @@
 	<hr />
 
 
-	<p:dataTable var="cat" value="#{sessionScope.categoriesList}"
-		style="background-color: white ; width: 900px ; center ; margin-left : 175px">
-		<p:column headerText="Photo">
-			<h:graphicImage value="#{cat.image}" width="200" height="200"></h:graphicImage>
-		</p:column>
+	<h:form id="form">
+		<p:dataGrid var="cat" value="#{sessionScope.categoriesList}"
+			columns="2" layout="grid" rows="2" paginator="true" id="cars"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="2,4,8" style="opacity: 0.8 ;width: 900px ; center ; margin-left : 200px;">
 
-		<p:column headerText="Nom">
-			<h:outputText value="#{cat.nomCategorie}" />
-		</p:column>
+			<f:facet name="header">
+            Liste des catégories
+        </f:facet>
 
-		<p:column headerText="Description">
-			<h:outputText value="#{cat.description}" />
-		</p:column>
+			<p:panel header="#{cat.nomCategorie}" style="text-align:center">
+				<h:panelGrid columns="1" style="width:100%">
+					<h:graphicImage value="#{cat.image}" width="200" height="200"></h:graphicImage>
 
+					
+					<h:outputText value="#{cat.description}" />
 
+					<p:commandLink value="Afficher les produits"
+						action="#{prMB.afficherParCategorieClient}">
+						<f:setPropertyActionListener value="#{cat.idCategorie}"
+							target="#{prMB.idCategorie}"/><f:setPropertyActionListener value="#{cat.idCategorie}"
+							target="#{adminMB.idCategorie}"/>
+					</p:commandLink>
 
-		<p:column headerText="Operations">
-			<h:form>
+				</h:panelGrid>
+			</p:panel>
 
-				<p:commandLink value="Afficher les produits"
-					action="#{prMB.afficherParCategorieClient}">
-					<f:setPropertyActionListener value="#{cat.idCategorie}"
-						target="#{prMB.idCategorie}"></f:setPropertyActionListener>
-				</p:commandLink>
-			</h:form>
-		</p:column>
+		</p:dataGrid>
 
-	</p:dataTable>
-	
+		<p:dialog header="Info" widgetVar="catDialog" modal="true"
+			showEffect="fade" hideEffect="fade" resizable="false">
+			<p:outputPanel id="catDetail" style="text-align:center;">
+				<p:panelGrid columns="2"
+					rendered="#{not empty dataGridView.selectedCar}"
+					columnClasses="label,value">
+					<f:facet name="header">
+						<p:graphicImage
+							name="demo/images/car/#{dataGridView.selectedCar.brand}-big.gif" />
+					</f:facet>
 
+					<h:outputText value="Id:" />
+					<h:outputText value="#{dataGridView.selectedCar.id}" />
+
+					<h:outputText value="Year" />
+					<h:outputText value="#{dataGridView.selectedCar.year}" />
+
+					<h:outputText value="Color:" />
+					<h:outputText value="#{dataGridView.selectedCar.color}"
+						style="color:#{dataGridView.selectedCar.color}" />
+
+					<h:outputText value="Price" />
+					<h:outputText value="$#{dataGridView.selectedCar.price}" />
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:dialog>
+	</h:form>
 
 
 </h:body>

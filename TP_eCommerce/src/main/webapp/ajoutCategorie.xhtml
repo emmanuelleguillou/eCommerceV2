@@ -7,16 +7,28 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<h:title>Page Ajout</h:title>
+	<title>Page Ajout</title>
 </h:head>
 <h:body>
+
+	<!-- Insertion du header -->
+	<ui:insert name="header"></ui:insert>
+	<ui:include src="template/headerAdmin.xhtml"></ui:include>
+
+	<h:graphicImage library="pictures" name="soleil.gif"
+		style="position: absolute; right: 80px;" width="100" height="100"></h:graphicImage>
+
+<h1 style="text-align: center; color: blue">Formulaire d'ajout d'une catégorie</h1>
+		
+			<hr />
+
 	<h:form enctype="multipart/form-data">
-		<h:panelGrid columns="2">
+		<h:panelGrid columns="2" style="background-color: white ;width: 200px; margin-left: 450px ; margin-top:50px">
 		Nom : <h:inputText value="#{caMB.categorie.nomCategorie}"></h:inputText>
 		Description : <h:inputText value="#{caMB.categorie.description}"></h:inputText>
 		Photo : <p:fileUpload mode="advanced" auto="true"
 				fileUploadListener="#{caMB.upload}" update="idImg" />
-			<h:graphicImage id="idImg" value="#{caMB.image}" width="200" height="200"></h:graphicImage>
+			<h:graphicImage id="idImg" value="#{caMB.image}" width="200" height="200"/>
 			
 			<p:commandButton value="Ajouter catégorie"
 				action="#{caMB.ajouterCatgeorie}"></p:commandButton>

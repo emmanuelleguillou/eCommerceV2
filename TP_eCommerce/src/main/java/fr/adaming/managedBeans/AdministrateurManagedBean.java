@@ -13,8 +13,10 @@ import org.apache.commons.codec.binary.Base64;
 
 import fr.adaming.model.Administrateur;
 import fr.adaming.model.Categorie;
+import fr.adaming.model.Produit;
 import fr.adaming.service.IAdministrateurService;
 import fr.adaming.service.ICategorieService;
+import fr.adaming.service.IProduitService;
 
 @ManagedBean(name = "adminMB")
 @RequestScoped
@@ -24,12 +26,37 @@ public class AdministrateurManagedBean implements Serializable {
 	private IAdministrateurService administrateurService;
 	@ManagedProperty(value = "#{categorieService}")
 	private ICategorieService categorieService;
+	@ManagedProperty(value = "#{produitService}")
+	private IProduitService produitService;
 
 	private Administrateur administrateur;
 
 	private List<Categorie> listeCategorie;
 
+	private List<Produit> listeProduit;
+
 	private HttpSession maSession;
+
+	private int idCategorie;
+	
+	
+	
+	
+	public int getIdCategorie() {
+		return idCategorie;
+	}
+
+	public void setIdCategorie(int idCategorie) {
+		this.idCategorie = idCategorie;
+	}
+
+	public IProduitService getProduitService() {
+		return produitService;
+	}
+
+	public void setProduitService(IProduitService produitService) {
+		this.produitService = produitService;
+	}
 
 	public AdministrateurManagedBean() {
 		this.administrateur = new Administrateur();
@@ -106,6 +133,28 @@ public class AdministrateurManagedBean implements Serializable {
 		// Ajouter la liste dans la session
 		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("categoriesList", listeCategorie);
 		return "accueil";
+
+	}
+
+	public String testAffichage2() {
+
+
+		List<Produit> listeOut = produitService.getAllPorduitByCategorie(idCategorie);
+		this.listeProduit = new ArrayList<Produit>();
+
+		for (Produit element : listeOut) {
+			if (element.getPhoto() == null) {
+				element.setImage(null);
+			} else {
+				element.setImage("data:image/png;base64," + Base64.encodeBase64(element.getPhoto()));
+			}
+			this.listeProduit.add(element);
+		}
+
+		// Mettre a jour la liste dans la session
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("produitListByCat", this.listeProduit);
+		
+		return "afficherListeProduit";
 
 	}
 

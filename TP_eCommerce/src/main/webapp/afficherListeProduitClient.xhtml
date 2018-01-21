@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
@@ -8,6 +6,11 @@
 
 <h:head>
 	<title>Page Accueil</title>
+	<f:metadata>
+		<!-- Pour appeler la methode au chargement -->
+		<f:event listener="#{adminMB.testAffichage2}" type="preRenderView"></f:event>
+	</f:metadata>
+	
 </h:head>
 
 <h:body>
@@ -25,53 +28,64 @@
 		<h:outputText value="#{sessionScope.nomCategorie}" />
 	</h1>
 	<hr />
+
 	<p:growl id="messages" />
-	<h:form>
-		<p:dataTable var="pro" value="#{prMB.listeProduit}">
 
-			<p:column headerText="Photo">
-				<h:graphicImage value="#{pro.image}" width="200" height="200"></h:graphicImage>
-			</p:column>
+	<h:form id="form">
+		<p:dataGrid var="pro" value="#{sessionScope.produitListByCat}"
+			columns="2"
+			layout="grid" rows="2" paginator="true" id="cars"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="2,4,8"
+			style="opacity: 0.8 ;width: 900px ; center ; margin-left : 200px;">
 
-			<p:column headerText="Designation">
-				<h:outputText value="#{pro.designation}" />
-			</p:column>
+			<f:facet name="header">
+            Liste des produits
+        </f:facet>
 
-			<p:column headerText="Description">
-				<h:outputText value="#{pro.description}" />
-			</p:column>
+			<p:panel header="#{pro.designation}" style="text-align:center">
+				<h:panelGrid columns="1" style="width:100%">
+					<h:graphicImage value="#{prMB.image}" width="200" height="200"/>
 
-			<p:column headerText="Prix">
-				<del>
-					<h:outputText value="#{pro.prix}" />
-				</del>
-			</p:column>
+					<h:outputText value="Description : #{pro.description}" />
+					
+					<br />
 
-			<p:column headerText="Reduction %">
-				<h:outputText value="#{pro.reduction}" />
-			</p:column>
+					<h:outputText value="Prix : #{pro.prix}" />
+					
+					<br />
 
-			<p:column headerText="Nouveau Prix">
-				<h:outputText value="#{pro.prix *(1- pro.reduction/100)}" />
-			</p:column>
+					<h:outputText value="Réduction : #{pro.reduction} " />
+					
+					<br />
 
-			<p:column headerText="Quantité en stock">
-				<h:outputText value="#{pro.quantite}" />
-			</p:column>
+					<h:outputText value="Prix après réduction : #{pro.prix *(1- pro.reduction/100)}" />
+					
+					<br />
 
-			<p:column headerText="Quantité souhaitée">
-				<h:inputText value="#{lcMB.ligneCommande.quantite}" />
+					<h:outputText value="Quantité en stock : #{pro.quantite}"/>
+					
+					<br />
 
-				<p:commandLink value="Ajouter au Panier"
-					action="#{lcMB.ajouterLigneCommande}" update="@all">
-					<f:setPropertyActionListener value="#{pro.idProduit}"
-						target="#{lcMB.produit.idProduit}"></f:setPropertyActionListener>
-				</p:commandLink>
-			</p:column>
+					<h:outputText value="Quantité souhaitée" />
+					<h:inputText value="#{lcMB.ligneCommande.quantite}" />
 
-		</p:dataTable>
+					<br />
+					<p:commandLink value="Ajouter au Panier"
+						action="#{lcMB.ajouterLigneCommande}" update="@all">
+						<f:setPropertyActionListener value="#{pro.idProduit}"
+							target="#{lcMB.produit.idProduit}"></f:setPropertyActionListener>
+					</p:commandLink>
+
+				</h:panelGrid>
+			</p:panel>
+
+		</p:dataGrid>
+
+	</h:form>
+
 
 		<h:messages style="text-align: center; color:red"></h:messages>
-	</h:form>
+
 </h:body>
 </html>

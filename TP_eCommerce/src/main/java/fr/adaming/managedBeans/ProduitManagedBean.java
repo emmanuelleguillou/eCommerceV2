@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -132,7 +133,22 @@ public class ProduitManagedBean implements Serializable {
 
 		if (this.produit.getIdProduit() != 0) {
 			// recuperer la nouvelle liste de la bd
-			this.listeProduit = produitService.getAllPorduit();
+			//this.listeProduit = produitService.getAllPorduit();
+			
+			List<Produit> listeOut= produitService.getAllPorduitByCategorie(idCategorie);
+			this.listeProduit = new ArrayList<Produit>();
+			
+			for (Produit element : listeOut) {
+				if (element.getPhoto() == null) {
+					element.setImage(null);
+				} else {
+					element.setImage("data:image/png;base64," + Base64.encodeBase64(element.getPhoto()));
+				}
+				this.listeProduit.add(element);
+			}
+			
+			
+			
 			// Mettre a jour la liste dans la session
 			maSession.setAttribute("produitListByCat", this.listeProduit);
 			return "accueilAdmin";
@@ -146,8 +162,24 @@ public class ProduitManagedBean implements Serializable {
 		System.out.println("IDCategorieTest= : " + idCategorie);
 		int idCat = (int) maSession.getAttribute("idCat");
 		// recuperer la nouvelle liste de la bd
-		this.listeProduit = produitService.getAllPorduitByCategorie(idCat);
+		//this.listeProduit = produitService.getAllPorduitByCategorie(idCat);
 		// smaSession.setAttribute("idCategorie", idCategorie);
+		
+		List<Produit> listeOut= produitService.getAllPorduitByCategorie(idCategorie);
+		this.listeProduit = new ArrayList<Produit>();
+		
+		for (Produit element : listeOut) {
+			if (element.getPhoto() == null) {
+				element.setImage(null);
+			} else {
+				element.setImage("data:image/png;base64," + Base64.encodeBase64(element.getPhoto()));
+			}
+			this.listeProduit.add(element);
+		}
+		
+		
+		
+		
 		// Mettre a jour la liste dans la session
 		maSession.setAttribute("produitListByCat", this.listeProduit);
 		return "afficherListeProduit";
@@ -163,7 +195,22 @@ public class ProduitManagedBean implements Serializable {
 		if (this.produit.getIdProduit() != 0) {
 			idCat = (int) maSession.getAttribute("idCat");
 			// recuperer la nouvelle liste de la bd
-			this.listeProduit = produitService.getAllPorduitByCategorie(idCat);
+			//this.listeProduit = produitService.getAllPorduitByCategorie(idCat);
+			
+			
+			List<Produit> listeOut= produitService.getAllPorduitByCategorie(idCategorie);
+			this.listeProduit = new ArrayList<Produit>();
+			
+			for (Produit element : listeOut) {
+				if (element.getPhoto() == null) {
+					element.setImage(null);
+				} else {
+					element.setImage("data:image/png;base64," + Base64.encodeBase64(element.getPhoto()));
+				}
+				this.listeProduit.add(element);
+			}
+			
+			
 			// Mettre a jour la liste dans la session
 			maSession.setAttribute("produitListByCat", this.listeProduit);
 			return "afficherListeProduit";
@@ -182,7 +229,22 @@ public class ProduitManagedBean implements Serializable {
 
 	public String afficherParCategorie() {
 		maSession.setAttribute("idCat", idCategorie);
-		this.listeProduit = produitService.getAllPorduitByCategorie(idCategorie);
+		
+		//this.listeProduit = produitService.getAllPorduitByCategorie(idCategorie);
+		
+		List<Produit> listeOut= produitService.getAllPorduitByCategorie(idCategorie);
+		this.listeProduit = new ArrayList<Produit>();
+		
+		for (Produit element : listeOut) {
+			if (element.getPhoto() == null) {
+				element.setImage(null);
+			} else {
+				element.setImage("data:image/png;base64," + Base64.encodeBase64(element.getPhoto()));
+			}
+			this.listeProduit.add(element);
+		}
+		
+		
 		// Ajouter la liste dans la session
 		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("produitListByCat", listeProduit);
 		return "afficherListeProduit";
@@ -206,7 +268,22 @@ public class ProduitManagedBean implements Serializable {
 
 	public String afficherParCategorieClient() {
 		maSession.setAttribute("idCat", idCategorie);
-		this.listeProduit = produitService.getAllPorduitByCategorie(idCategorie);
+
+		//this.listeProduit = produitService.getAllPorduitByCategorie(idCategorie);
+		
+		List<Produit> listeOut= produitService.getAllPorduitByCategorie(idCategorie);
+		this.listeProduit = new ArrayList<Produit>();
+		
+		for (Produit element : listeOut) {
+			if (element.getPhoto() == null) {
+				element.setImage(null);
+			} else {
+				element.setImage("data:image/png;base64," + Base64.encodeBase64(element.getPhoto()));
+			}
+			this.listeProduit.add(element);
+		}
+		
+		
 		// Ajouter la liste dans la session
 		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("produitListByCat", listeProduit);
 		return "afficherListeProduitClient";
@@ -257,7 +334,7 @@ public class ProduitManagedBean implements Serializable {
 		// Recuperer le contenu de l'image en byte array (pixels)
 		byte[] contents = uploadFile.getContents();
 		System.out.println("----------------   " + contents);
-		categorie.setPhoto(contents);
+		produit.setPhoto(contents);
 		// Transforme byte array en string (format basé64)
 		image = "data:image/png;base64," + Base64.encodeBase64String(produit.getPhoto());
 		

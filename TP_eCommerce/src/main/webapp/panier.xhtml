@@ -73,7 +73,7 @@
 					action="#{lcMB.supprimerLigneCommande}" update="@all">
 					<f:setPropertyActionListener value="#{lc.idLigneCommande}"
 						target="#{lcMB.ligneCommande.idLigneCommande}"></f:setPropertyActionListener>
-				</h:commandLink> | 
+				</h:commandLink>  
 			</p:column>
 
 
@@ -84,7 +84,7 @@
 			<h:outputText value="#{sessionScope.prixTotal}" />
 		</h1>
 		<br />
-		<h:commandButton style="position: absolute; right:250px;"
+		<h:commandButton style="position: absolute; right:625px;"
 			value="Valider la commande" action="#{cMB.ajouterComande}" />
 
 	</h:form>

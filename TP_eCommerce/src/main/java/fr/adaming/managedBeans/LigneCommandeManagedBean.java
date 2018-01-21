@@ -219,8 +219,18 @@ public class LigneCommandeManagedBean implements Serializable {
 
 		// récupérer toutes les lignes de commandes avec un id comande null (car
 		// non validée)
-		this.listeLigneCommande = ligneCommandeService.getAllLignesCommandes();
+		List<LigneCommande> listeOut = ligneCommandeService.getAllLignesCommandes();
+		for (LigneCommande element : this.listeLigneCommande) {
+			// -----------Recalcul du prix de la ligne de commande------
+			element.setPrix(ligneCommandeService.calculPrixLigneCommande(element, element.getProduit()));
 
+			// -----------update de la ligne dans la base de données--------
+			ligneCommandeService.updateLigneCommande(element);
+			System.out.println("-----------Quantité lc modifiée : " + lcInitiale.getQuantite());
+			this.listeLigneCommande.add(element);
+		} 
+		
+		
 		// Passer la liste des lignes commandes dans la session
 		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeLCPanier",
 				this.listeLigneCommande);
