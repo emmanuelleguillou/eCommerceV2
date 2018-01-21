@@ -57,10 +57,20 @@
 				<h:outputText
 					value="#{lc.produit.prix *(1- lc.produit.reduction/100) *lc.quantite}" />
 			</p:column>
+			
+			<p:column headerText="Modifier la quantité">
+				<h:inputText value="#{lcMB.ligneCommande.quantite}" />
+
+				<p:commandLink value="Valider"
+					action="#{lcMB.modifierQuantiteLC}" update="@all">
+					<f:setPropertyActionListener value="#{lc.idLigneCommande}"
+						target="#{lcMB.ligneCommande.idLigneCommande}"></f:setPropertyActionListener>
+				</p:commandLink>
+			</p:column>
 
 			<p:column headerText="Opérations">
-				<h:commandLink value="Supprimer" action="#{lcMB.supprimerLigneCommande}"
-					update="@all">
+				<h:commandLink value="Supprimer"
+					action="#{lcMB.supprimerLigneCommande}" update="@all">
 					<f:setPropertyActionListener value="#{lc.idLigneCommande}"
 						target="#{lcMB.ligneCommande.idLigneCommande}"></f:setPropertyActionListener>
 				</h:commandLink> | 

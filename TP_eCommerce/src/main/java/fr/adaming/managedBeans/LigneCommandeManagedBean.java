@@ -129,7 +129,7 @@ public class LigneCommandeManagedBean implements Serializable {
 		this.ligneCommande.setPrix(ligneCommandeService.calculPrixLigneCommande(this.ligneCommande, this.produit));
 
 		if (this.produit.getQuantite() >= 0) {
-			// modification de la quantité de produit en stock
+			// calcul de la quantité de produit en stock
 			int quantiteRestante = this.produit.getQuantite() - this.ligneCommande.getQuantite();
 
 			// Modifier la quantité de produit en stock restant
@@ -157,9 +157,9 @@ public class LigneCommandeManagedBean implements Serializable {
 		this.prixTotal = ligneCommandeService.calculPrixToutesLignesCommandes(this.listeLigneCommande);
 		System.out.println("prix total des lc: ----------------------- " + this.prixTotal);
 
-		//Passer le prix total dans la session
+		// Passer le prix total dans la session
 		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("prixTotal", this.prixTotal);
-		
+
 		if (this.ligneCommande.getIdLigneCommande() != 0) {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage("Success", "Ligne de commande ajoutée"));
@@ -202,18 +202,21 @@ public class LigneCommandeManagedBean implements Serializable {
 
 	public String supprimerLigneCommande() {
 
-		
-		//Si la ligne de commande est supprimée la quantité de produt sélectionné est remis en stock
-		this.ligneCommande=ligneCommandeService.getLigneCommande(this.ligneCommande.getIdLigneCommande());
-		this.ligneCommande.getProduit().setQuantite(this.ligneCommande.getQuantite());
+		// Si la ligne de commande est supprimée la quantité de produt
+		// sélectionné est remis en stock
+		this.ligneCommande = ligneCommandeService.getLigneCommande(this.ligneCommande.getIdLigneCommande());
+
+		int quantiteFinale = this.ligneCommande.getProduit().getQuantite() + this.ligneCommande.getQuantite();
+
+		this.ligneCommande.getProduit().setQuantite(quantiteFinale);
 		produitService.updateProduit(this.ligneCommande.getProduit());
-		
-		//suppresion de cette ligne de commande
+
+		// suppresion de cette ligne de commande
 		ligneCommandeService.deleteLigneCommande(this.ligneCommande.getIdLigneCommande());
-		
-		//verification de la suppression de la ligne de commande
+
+		// verification de la suppression de la ligne de commande
 		LigneCommande lcOut = ligneCommandeService.getLigneCommande(this.ligneCommande.getIdLigneCommande());
-		
+
 		// récupérer toutes les lignes de commandes avec un id comande null (car
 		// non validée)
 		this.listeLigneCommande = ligneCommandeService.getAllLignesCommandes();
@@ -222,8 +225,6 @@ public class LigneCommandeManagedBean implements Serializable {
 		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeLCPanier",
 				this.listeLigneCommande);
 
-		
-		
 		if (lcOut == null) {
 			return "accueil";
 		} else {
@@ -256,6 +257,128 @@ public class LigneCommandeManagedBean implements Serializable {
 		} else {
 
 			return "CommandeKO";
+		}
+
+	}
+
+	public void modifierQuantiteLC() {
+
+		// récupérer la ligne de commande
+		LigneCommande lcInitiale = ligneCommandeService.getLigneCommande(this.ligneCommande.getIdLigneCommande());
+		System.out.println("-----------ligne Commande initiale : " + lcInitiale);
+
+		// récupération de la quantité en stock du produit sélectionné
+		int quantiteStock = lcInitiale.getProduit().getQuantite();
+		System.out.println("-----------quantité en stock de produit : " + quantiteStock);
+
+		// récuération de la quantité de produit sélectionné avant la
+		// modification
+		int quantiteAvantModif = lcInitiale.getQuantite();
+		System.out.println("-----------quantité LC avant modif: " + quantiteAvantModif);
+
+		if (quantiteAvantModif > this.ligneCommande.getQuantite()) {
+			int differenceQuantite = quantiteAvantModif - this.ligneCommande.getQuantite();
+
+			// on calcul la nouvelle quantité en stock
+			int quantiteFinale = quantiteStock + differenceQuantite;
+
+			if (quantiteFinale > 0) {
+				// --------Modifiction des stocks du produit-----
+				// on rajoute la quantité de produit en trop au stock du produit
+				lcInitiale.getProduit().setQuantite(quantiteFinale);
+				produitService.updateProduit(lcInitiale.getProduit());
+
+				// ------Modification de la quantité de la ligne de commande---
+				// modifier la quantité de produit selon la nouvelle valeur
+				// rentrée par
+				// le client
+				lcInitiale.setQuantite(this.ligneCommande.getQuantite());
+
+				// -----------Recalcul du prix de la ligne de commande------
+				// calcul du prix total
+				lcInitiale.setPrix(ligneCommandeService.calculPrixLigneCommande(lcInitiale, lcInitiale.getProduit()));
+
+				// -----------update de la ligne dans la base de données--------
+				ligneCommandeService.updateLigneCommande(lcInitiale);
+				System.out.println("-----------Quantité lc modifiée : " + lcInitiale.getQuantite());
+
+				// ------------------MAJ Affichage LC--------------
+				// récupérer toutes les lignes de commandes avec un id comande
+				// null (car non validée)
+				this.listeLigneCommande = ligneCommandeService.getAllLignesCommandes();
+
+				// Passer la liste des lignes commandes dans la session
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeLCPanier",
+						this.listeLigneCommande);
+
+				// -----------------Modification Prix Commande ---------
+				// Calcul du prix de toutes les lignes commandes
+				this.prixTotal = ligneCommandeService.calculPrixToutesLignesCommandes(this.listeLigneCommande);
+				System.out.println("prix total des lc: ----------------------- " + this.prixTotal);
+
+				// Passer le prix total dans la session
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("prixTotal", this.prixTotal);
+
+				// -----------------Modification Prix Commande
+				// Calcul du prix de toutes les lignes commandes
+				this.prixTotal = ligneCommandeService.calculPrixToutesLignesCommandes(this.listeLigneCommande);
+				System.out.println("prix total des lc: ----------------------- " + this.prixTotal);
+
+				// Passer le prix total dans la session
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("prixTotal", this.prixTotal);
+
+			} else {
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage("Failure", "La quantité en stock du produit n'est pas suffisante"));
+			}
+
+		} else {
+			int differenceQuantite = this.ligneCommande.getQuantite() - quantiteAvantModif;
+
+			// on calcul la nouvelle quantité en stock
+			int quantiteFinale = quantiteStock - differenceQuantite;
+
+			if (quantiteFinale > 0) {
+				// ---------------Modifiction des stocks du produit--------
+				// on rajoute la quantité de produit en trop au stock du produit
+				lcInitiale.getProduit().setQuantite(quantiteFinale);
+				produitService.updateProduit(lcInitiale.getProduit());
+
+				// ---------Modification de la quantité de la ligne de commande
+				// modifier la quantité de produit selon la nouvelle valeur
+				// rentrée par le client
+				lcInitiale.setQuantite(this.ligneCommande.getQuantite());
+
+				// ----------------Recalcul du prix de la ligne de commande-----
+				// calcul du prix total
+				lcInitiale.setPrix(ligneCommandeService.calculPrixLigneCommande(lcInitiale, lcInitiale.getProduit()));
+
+				// ----------------update de la ligne dans la base de données
+				ligneCommandeService.updateLigneCommande(lcInitiale);
+				System.out.println("-----------Quantité lc modifiée : " + lcInitiale.getQuantite());
+
+				// ------------------MAJ Affichage LC-------------------
+				// récupérer toutes les lignes de commandes avec un id comande
+				// null (car non validée)
+				this.listeLigneCommande = ligneCommandeService.getAllLignesCommandes();
+
+				// Passer la liste des lignes commandes dans la session
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeLCPanier",
+						this.listeLigneCommande);
+
+				// -----------------Modification Prix Commande --------
+				// Calcul du prix de toutes les lignes commandes
+				this.prixTotal = ligneCommandeService.calculPrixToutesLignesCommandes(this.listeLigneCommande);
+				System.out.println("prix total des lc: ----------------------- " + this.prixTotal);
+
+				// Passer le prix total dans la session
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("prixTotal", this.prixTotal);
+
+			} else {
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage("Failure", "La quantité en stock du produit n'est pas suffisante"));
+			}
+
 		}
 
 	}
