@@ -58,7 +58,21 @@
 					value="#{lc.produit.prix *(1- lc.produit.reduction/100) *lc.quantite}" />
 			</p:column>
 
+			<p:column headerText="Opérations">
+				<h:commandLink value="Supprimer" action="#{lcMB.supprimerLigneCommande}"
+					update="@all">
+					<f:setPropertyActionListener value="#{lc.idLigneCommande}"
+						target="#{lcMB.ligneCommande.idLigneCommande}"></f:setPropertyActionListener>
+				</h:commandLink> | 
+			</p:column>
+
+
 		</p:dataTable>
+		<br />
+		<h1 style="text-align: center; color: red">
+			Prix de la commande :
+			<h:outputText value="#{sessionScope.prixTotal}" />
+		</h1>
 		<br />
 		<h:commandButton style="position: absolute; right:250px;"
 			value="Valider la commande" action="#{cMB.ajouterComande}" />
@@ -69,10 +83,7 @@
 	<br />
 
 
-	<h1 style="text-align: center; color: blue">
-		Prix de la commande :
-		<h:outputText value="#{lcMB.prixTotal}" />
-	</h1>
+
 
 
 

@@ -157,6 +157,9 @@ public class LigneCommandeManagedBean implements Serializable {
 		this.prixTotal = ligneCommandeService.calculPrixToutesLignesCommandes(this.listeLigneCommande);
 		System.out.println("prix total des lc: ----------------------- " + this.prixTotal);
 
+		//Passer le prix total dans la session
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("prixTotal", this.prixTotal);
+		
 		if (this.ligneCommande.getIdLigneCommande() != 0) {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage("Success", "Ligne de commande ajoutée"));
@@ -199,8 +202,28 @@ public class LigneCommandeManagedBean implements Serializable {
 
 	public String supprimerLigneCommande() {
 
+		
+		//Si la ligne de commande est supprimée la quantité de produt sélectionné est remis en stock
+		this.ligneCommande=ligneCommandeService.getLigneCommande(this.ligneCommande.getIdLigneCommande());
+		this.ligneCommande.getProduit().setQuantite(this.ligneCommande.getQuantite());
+		produitService.updateProduit(this.ligneCommande.getProduit());
+		
+		//suppresion de cette ligne de commande
 		ligneCommandeService.deleteLigneCommande(this.ligneCommande.getIdLigneCommande());
+		
+		//verification de la suppression de la ligne de commande
 		LigneCommande lcOut = ligneCommandeService.getLigneCommande(this.ligneCommande.getIdLigneCommande());
+		
+		// récupérer toutes les lignes de commandes avec un id comande null (car
+		// non validée)
+		this.listeLigneCommande = ligneCommandeService.getAllLignesCommandes();
+
+		// Passer la liste des lignes commandes dans la session
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeLCPanier",
+				this.listeLigneCommande);
+
+		
+		
 		if (lcOut == null) {
 			return "accueil";
 		} else {
