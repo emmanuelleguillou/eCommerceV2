@@ -244,7 +244,7 @@ public class LigneCommandeManagedBean implements Serializable {
 
 	public String afficherLigneCommandeByIDCommande() {
 
-		indice = true;
+		this.indice = true;
 		// passer toutes les lignes de commande d'une commande dans une liste
 		// List<LigneCommande> listeLCbyC =
 		// ligneCommandeService.getAllLigneCommandeByIdCommande(this.commande.getIdCommande());
