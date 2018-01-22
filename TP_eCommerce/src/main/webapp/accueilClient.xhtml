@@ -28,7 +28,7 @@
 			<hr />
 
 	<h:form>
-		<p:dataTable style="background-color: white ; width: 900px ; center ; margin-left : 175px"  var="com" value="#{lcMB.commande}">
+		<p:dataTable style="background-color: white ; width: 900px ; center ; margin-left : 175px"  var="com" value="#{cMB.commande}">
 			<p:column headerText="N° de la commande">
 				<h:outputText value="#{com.idCommande}" />
 			</p:column>
@@ -52,7 +52,7 @@
 	</h:form>
 
 
-	<h:form id="tableau" rendered="#{lcMB.indice}">
+<h:form id="tableau" rendered="#{lcMB.indice}">
 		<p:dataTable style="background-color: white ; width: 900px ; center ; margin-left : 175px"  var="lc" value="#{lcMB.listeLigneCommande}">
 			<p:column headerText="Id Ligne Commande">
 				<h:outputText value="#{lc.idLigneCommande}" />

@@ -7,7 +7,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>Page Login</title>
+	<title>Page Login Client</title>
 </h:head>
 <h:body
 	style="background: url('resources/pictures/fod4.jpg.jpg') no-repeat center; background-size: cover">
@@ -15,18 +15,16 @@
 	<h:graphicImage library="pictures" name="soleil.gif"
 		style="position: absolute; right: 80px;" width="150" height="150"></h:graphicImage>
 
-	<h1 style="text-align: center; color: blue">Enregistrement du
-		client</h1>
+	<h1 style="text-align: center; color: blue">Connexion du client</h1>
 
 	<hr />
 
-	<h2 style="text-align: center; color: blue; margin-top: 50px">Connectez-vous</h2>
 
-
-	<h:form>
-		<h:panelGrid
-			style="background-color: white ;width: 250px; margin-left: 475px ; margin-top:50px"
-			columns="2">
+	<h:form
+		style="background-color: white ;width: 250px; margin-left: 550px ; margin-top:50px">
+		<h2 style="text-align: center; color: blue">Connexion</h2>
+		<h:panelGrid columns="2">
+			<br />
 		Nom : <h:inputText value="#{clMB.client.nomClient}"></h:inputText>
 			<br />
 		Mail : <h:inputText value="#{clMB.client.email}"></h:inputText>
@@ -34,21 +32,17 @@
 
 		</h:panelGrid>
 		<br />
-		<h:commandButton
-			style="center; margin-left : 500px; background-color : aqua"
-			value="Login" action="#{clMB.rechercherClient}" />
+		<h:commandButton style="center; background-color : aqua" value="Login"
+			action="#{clMB.rechercherClient}" />
 	</h:form>
+	<hr />
 
-	<br />
-	<gr />
-	<br />
 
-	<h2
-		style="text-align: center; color: blue; margin-top: 50px">Enregistrez-vous</h2>
-
-	<h:form>
-		<h:panelGrid style="background-color: white ;width: 250px; margin-left: 475px ; margin-top:50px" columns="2">
-
+	<h:form style="background-color: white ;margin-left: 500px ; width: 350px">
+		<h2 style="text-align: center; color: blue">Enregistrement</h2>
+		<h:panelGrid columns="2"
+			style="background-color: white ; width: 250px;">
+			<br />
 		Nom : <p:inputText id="idNom" label="Nom"
 				value="#{clMB.client.nomClient}" required="true"></p:inputText>
 
@@ -67,15 +61,22 @@
 		Téléphone : <p:inputText id="idTelephone" label="Telephone"
 				value="#{clMB.client.tel}" required="true"></p:inputText>
 
-			<br />
 
 
 		</h:panelGrid>
-		<br />
-		<h:commandButton style="center; margin-left : 500px; background-color : aqua" value="Ajouter un client"
-			action="#{clMB.ajouterClient}" />
+
+		<h:commandButton style="center; background-color : aqua"
+			value="Ajouter un client" action="#{clMB.ajouterClient}" />
 
 	</h:form>
+
+
+
+
+
+
+
+
 
 
 </h:body>

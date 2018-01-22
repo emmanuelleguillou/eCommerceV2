@@ -58,32 +58,6 @@
 
 		</p:dataGrid>
 
-		<p:dialog header="Info" widgetVar="catDialog" modal="true"
-			showEffect="fade" hideEffect="fade" resizable="false">
-			<p:outputPanel id="catDetail" style="text-align:center;">
-				<p:panelGrid columns="2"
-					rendered="#{not empty dataGridView.selectedCar}"
-					columnClasses="label,value">
-					<f:facet name="header">
-						<p:graphicImage
-							name="demo/images/car/#{dataGridView.selectedCar.brand}-big.gif" />
-					</f:facet>
-
-					<h:outputText value="Id:" />
-					<h:outputText value="#{dataGridView.selectedCar.id}" />
-
-					<h:outputText value="Year" />
-					<h:outputText value="#{dataGridView.selectedCar.year}" />
-
-					<h:outputText value="Color:" />
-					<h:outputText value="#{dataGridView.selectedCar.color}"
-						style="color:#{dataGridView.selectedCar.color}" />
-
-					<h:outputText value="Price" />
-					<h:outputText value="$#{dataGridView.selectedCar.price}" />
-				</p:panelGrid>
-			</p:outputPanel>
-		</p:dialog>
 	</h:form>
 
 

@@ -19,22 +19,22 @@
 		style="position: absolute; right: 80px;" width="100" height="100"></h:graphicImage>
 
 
-	<h1 style="text-align: center; color: blue">Formulaire de modification de votre compte</h1>
-		
-			<hr />
+	<h1 style="text-align: center; color: blue">Formulaire de
+		modification de votre compte</h1>
+
+	<hr />
 
 
 	<h:form>
-	<p:growl id="messages" />
-		<h:panelGrid style="background-color: white ;width: 200px; margin-left: 450px ; margin-top:50px" columns="2">
-ID Client : <p:inputText id="idCl" label="ID CL" value="#{clMB.client.idClient}"
-				required="true"></p:inputText>
-
-			<br />
+		<p:growl id="messages" />
+		<h:panelGrid
+			style="background-color: white ;width: 200px; margin-left: 450px ; margin-top:50px"
+			columns="2">
 
 
-Nom : <p:inputText id="idNom" label="Nom" value="#{clMB.client.nomClient}"
-				required="true"></p:inputText>
+
+Nom : <p:inputText id="idNom" label="Nom"
+				value="#{clMB.client.nomClient}" required="true"></p:inputText>
 
 			<br />
 
@@ -43,8 +43,8 @@ Adresse : <p:inputText id="idAdresse" label="Adresse"
 
 			<br />
 
-Email : <p:inputText id="idEmail" label="Email" value="#{clMB.client.email}"
-				required="true"></p:inputText>
+Email : <p:inputText id="idEmail" label="Email"
+				value="#{clMB.client.email}" required="true"></p:inputText>
 
 			<br />
 
@@ -52,13 +52,13 @@ Téléphone : <p:inputText id="idTelephone" label="Telephone"
 				value="#{clMB.client.tel}" required="true"></p:inputText>
 
 			<br />
-			<br />
-
-			<h:commandButton style="center" value="Modifier votre compte"
-				action="#{clMB.modifierClient}" />
 
 		</h:panelGrid>
-
+		
+		<h:commandButton style="center;  margin-left: 450px ;" value="Modifier votre compte"
+			action="#{clMB.modifierClient}" >
+		<f:setPropertyActionListener value="#{sessionScope.client.idClient}"
+			target="#{clMB.client.idClient}" /></h:commandButton>
 
 	</h:form>
 

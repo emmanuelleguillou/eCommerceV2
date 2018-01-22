@@ -163,7 +163,7 @@ public class LigneCommandeManagedBean implements Serializable {
 		if (this.ligneCommande.getIdLigneCommande() != 0) {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage("Success", "Ligne de commande ajoutée"));
-			return "afficherListeProduitClient";
+			return "accueil";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage("Failure", "Ligne de commande non ajoutée"));
@@ -226,7 +226,6 @@ public class LigneCommandeManagedBean implements Serializable {
 
 			// -----------update de la ligne dans la base de données--------
 			ligneCommandeService.updateLigneCommande(element);
-			System.out.println("-----------Quantité lc modifiée : " + lcInitiale.getQuantite());
 			this.listeLigneCommande.add(element);
 		} 
 		
@@ -258,9 +257,10 @@ public class LigneCommandeManagedBean implements Serializable {
 
 		for (LigneCommande ligneCommande : this.listeLigneCommande) {
 			System.out.println(ligneCommande);
+			
 		}
 		this.commande = commandeService.getCommande(idCommande);
-
+		System.out.println("------------------idCommande"+idCommande);
 		if (this.commande != null) {
 
 			return "CommandeOK";
