@@ -25,6 +25,10 @@
 	<h:graphicImage library="pictures" name="soleil.gif"
 		style="position: absolute; right: 80px;" width="100" height="100"></h:graphicImage>
 
+	
+
+
+
 	<h1 style="text-align: center; color: blue">Liste des categories</h1>
 	<hr />
 
@@ -33,7 +37,8 @@
 		<p:dataGrid var="cat" value="#{sessionScope.categoriesList}"
 			columns="2" layout="grid" rows="2" paginator="true" id="cars"
 			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-			rowsPerPageTemplate="2,4,8" style="opacity: 0.8 ;width: 900px ; center ; margin-left : 200px;">
+			rowsPerPageTemplate="2,4,8"
+			style="opacity: 0.8 ;width: 900px ; center ; margin-left : 200px;">
 
 			<f:facet name="header">
             Liste des catégories
@@ -43,14 +48,15 @@
 				<h:panelGrid columns="1" style="width:100%">
 					<h:graphicImage value="#{cat.image}" width="200" height="200"></h:graphicImage>
 
-					
+
 					<h:outputText value="#{cat.description}" />
 
 					<p:commandLink value="Afficher les produits"
 						action="#{prMB.afficherParCategorieClient}">
 						<f:setPropertyActionListener value="#{cat.idCategorie}"
-							target="#{prMB.idCategorie}"/><f:setPropertyActionListener value="#{cat.idCategorie}"
-							target="#{adminMB.idCategorie}"/>
+							target="#{prMB.idCategorie}" />
+						<f:setPropertyActionListener value="#{cat.idCategorie}"
+							target="#{adminMB.idCategorie}" />
 					</p:commandLink>
 
 				</h:panelGrid>

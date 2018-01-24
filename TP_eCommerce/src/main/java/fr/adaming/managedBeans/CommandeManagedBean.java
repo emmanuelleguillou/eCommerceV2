@@ -195,7 +195,7 @@ public class CommandeManagedBean implements Serializable {
 		Document document = new Document();
 		try {
 			// Définir le type de document souhaité ainsi que son nom
-			PdfWriter.getInstance(document, new FileOutputStream("C:/Users/inti0294/Desktop/PDFTp/commande" + this.idCommande + ".pdf"));
+			PdfWriter.getInstance(document, new FileOutputStream("C:/Users/marin/Desktop/PDFTp/commande" + this.idCommande + ".pdf"));
 			// Ouverture du document
 			document.open();
 			// Definition des polices
@@ -250,7 +250,7 @@ public class CommandeManagedBean implements Serializable {
 		try{
 		 // Creation de la piece jointe
 		 EmailAttachment attachment = new EmailAttachment();
-		 attachment.setPath("C:/Users/inti0294/Desktop/PDFTp/commande" + this.idCommande + ".pdf");
+		 attachment.setPath("C:/Users/marin/Desktop/PDFTp/commande" + this.idCommande + ".pdf");
 		 attachment.setDisposition(EmailAttachment.ATTACHMENT);
 		 
 		 

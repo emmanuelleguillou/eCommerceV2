@@ -40,10 +40,7 @@ ID Commande : <p:inputText id="idC" label="ID Commande" value="#{cMB.commande.id
 				<f:setPropertyActionListener value="#{cMB.commande.idCommande}"
 				target="#{sessionScope.idCommande}" />
 				</h:commandButton>
-
 		</h:panelGrid>
-
-
 	</h:form>
 
 
@@ -57,11 +54,10 @@ ID Commande : <p:inputText id="idC" label="ID Commande" value="#{cMB.commande.id
 			<p:column headerText="Date de la commande">
 				<h:outputText value="#{com.dateCommande}" />
 			</p:column>
-
-
-
 		</p:dataTable>
 	</h:form>
+
+
 
 	<h:form>
 		<h:commandButton style="margin-left : 175px" value="Afficher le détail"

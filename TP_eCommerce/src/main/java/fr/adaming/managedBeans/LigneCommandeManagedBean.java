@@ -220,24 +220,24 @@ public class LigneCommandeManagedBean implements Serializable {
 		// récupérer toutes les lignes de commandes avec un id comande null (car
 		// non validée)
 		List<LigneCommande> listeOut = ligneCommandeService.getAllLignesCommandes();
-		for (LigneCommande element : this.listeLigneCommande) {
+		for (LigneCommande element : listeOut) {
 			// -----------Recalcul du prix de la ligne de commande------
 			element.setPrix(ligneCommandeService.calculPrixLigneCommande(element, element.getProduit()));
 
 			// -----------update de la ligne dans la base de données--------
 			ligneCommandeService.updateLigneCommande(element);
 			this.listeLigneCommande.add(element);
-		} 
-		
-		
+		}
+
+	
 		// Passer la liste des lignes commandes dans la session
 		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeLCPanier",
 				this.listeLigneCommande);
 
 		if (lcOut == null) {
-			return "accueil";
+			return "panier";
 		} else {
-			return "supprimerLigneCommande";
+			return "panier";
 		}
 
 	}
@@ -257,10 +257,10 @@ public class LigneCommandeManagedBean implements Serializable {
 
 		for (LigneCommande ligneCommande : this.listeLigneCommande) {
 			System.out.println(ligneCommande);
-			
+
 		}
 		this.commande = commandeService.getCommande(idCommande);
-		System.out.println("------------------idCommande"+idCommande);
+		System.out.println("------------------idCommande" + idCommande);
 		if (this.commande != null) {
 
 			return "CommandeOK";
@@ -329,14 +329,7 @@ public class LigneCommandeManagedBean implements Serializable {
 				// Passer le prix total dans la session
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("prixTotal", this.prixTotal);
 
-				// -----------------Modification Prix Commande
-				// Calcul du prix de toutes les lignes commandes
-				this.prixTotal = ligneCommandeService.calculPrixToutesLignesCommandes(this.listeLigneCommande);
-				System.out.println("prix total des lc: ----------------------- " + this.prixTotal);
-
-				// Passer le prix total dans la session
-				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("prixTotal", this.prixTotal);
-
+				
 			} else {
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage("Failure", "La quantité en stock du produit n'est pas suffisante"));
