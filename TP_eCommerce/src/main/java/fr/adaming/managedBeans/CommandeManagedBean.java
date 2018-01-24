@@ -209,8 +209,6 @@ public class CommandeManagedBean implements Serializable {
 			Phrase p1 = new Phrase("Recapitulatif de votre commande : \n\n\n\n");
 			
 			PdfPTable table = new PdfPTable(6);
-			table.addCell("ID Ligne Commande");
-			table.addCell("Id Produit");
 			table.addCell("Produit");
 			table.addCell("Prix unitaire");
 			table.addCell("Prix unitaire après remise");
@@ -218,14 +216,12 @@ public class CommandeManagedBean implements Serializable {
 			table.addCell("Prix total");
 			table.addCell("Prix total après remise");
 			for (LigneCommande ligneCommande : this.listeLigneCommande) {
-				table.addCell(Integer.toString(ligneCommande.getIdLigneCommande()));
-				table.addCell(Integer.toString(ligneCommande.getProduit().getIdProduit()));
 				table.addCell(ligneCommande.getProduit().getDesignation());
 				table.addCell(Double.toString(ligneCommande.getProduit().getPrix()));
 				table.addCell(Double.toString(ligneCommande.getProduit().getReduction()));
 				table.addCell(Integer.toString(ligneCommande.getQuantite()));
 				table.addCell(Double.toString(ligneCommande.getPrix()));
-				table.addCell(Double.toString(ligneCommande.getPrix()*(1-ligneCommande.getProduit().getReduction())));
+				table.addCell(Double.toString(ligneCommande.getPrix()*(1-ligneCommande.getProduit().getReduction()/100)));
 			}
 			
 			Phrase p2 = new Phrase("Total de la commande : " +this.commande.getPrix() +"€");
